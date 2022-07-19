@@ -1,4 +1,4 @@
-package com.example;
+package com.example.playwright;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
@@ -14,35 +14,15 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 import org.junit.platform.launcher.TestExecutionListener;
 import org.junit.platform.launcher.TestPlan;
 
-import java.util.List;
 import java.util.Set;
 
 public class PlaywrightExtension implements BeforeEachCallback, AfterEachCallback, ParameterResolver {
-
-    private static final BrowserType.LaunchOptions launchOptions = createLaunchOption();
-
 
     public static Playwright playwright;
 
     public static Browser browser;
 
     public BrowserContext browserContext;
-
-    public static void initializePlaywright() {
-        playwright = Playwright.create();
-        browser = playwright.chromium().launch(launchOptions);
-    }
-
-
-    private static BrowserType.LaunchOptions createLaunchOption() {
-        return new BrowserType.LaunchOptions()
-                .setHeadless(false)
-                .setSlowMo(0); // ms
-    }
-
-    public static void terminatePlaywright() {
-        playwright.close();
-    }
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) throws Exception {
@@ -53,6 +33,28 @@ public class PlaywrightExtension implements BeforeEachCallback, AfterEachCallbac
     public void afterEach(ExtensionContext context) throws Exception {
         browserContext.close();
     }
+
+    private static void initializePlaywright() {
+        playwright = Playwright.create();
+        browser = new BrowserFactory().create(playwright);
+    }
+
+    public static void terminatePlaywright() {
+        playwright.close();
+    }
+
+    public static class PlaywrightExecutionListener implements TestExecutionListener {
+        @Override
+        public void testPlanExecutionStarted(TestPlan testPlan) {
+            initializePlaywright();
+        }
+
+        @Override
+        public void testPlanExecutionFinished(TestPlan testPlan) {
+            terminatePlaywright();
+        }
+    }
+
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
@@ -79,17 +81,4 @@ public class PlaywrightExtension implements BeforeEachCallback, AfterEachCallbac
         throw new IllegalArgumentException(type.toGenericString());
 
     }
-
-    public static class PlaywrightExecutionListener implements TestExecutionListener {
-        @Override
-        public void testPlanExecutionStarted(TestPlan testPlan) {
-            initializePlaywright();
-        }
-
-        @Override
-        public void testPlanExecutionFinished(TestPlan testPlan) {
-            terminatePlaywright();
-        }
-    }
-
 }
