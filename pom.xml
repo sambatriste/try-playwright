@@ -32,6 +32,7 @@
       <version>1.8.2</version>
     </dependency>
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -54,12 +55,38 @@
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.1.0</version>
         <executions>
+          <!--
+            mvn exec:java@codegen
+          -->
           <execution>
-            <id>default-cli</id>
+            <id>codegen</id>
             <configuration>
               <mainClass>com.microsoft.playwright.CLI</mainClass>
               <arguments>
                 <argument>codegen</argument>
+                <argument>fintan.jp</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <!--
+            プロキシ下での実行。環境変数HTTPS_PROXYにプロキシを指定しておく。
+            Mavenから実行時にコマンドラインオプションとして引き渡す。
+
+            set HTTPS_PROXY=http://proxy.example.com:8080
+            mvn exec:java@codegen-with-proxy
+          -->
+          <execution>
+            <id>codegen-with-proxy</id>
+            <configuration>
+              <mainClass>com.microsoft.playwright.CLI</mainClass>
+              <arguments>
+                <argument>codegen</argument>
+                <!--
+                  環境変数HTTPS_PROXYを設定していても、codegenではプロキシは認識されなかった。
+                  コマンドラインオプションとして明示的に設定することでプロキシ設定が有効になる。
+                  https://scrapingant.com/blog/how-to-use-a-proxy-in-playwright#command-line-arguments-only-for-chromium
+                -->
+                <argument>--proxy-server=${env.HTTPS_PROXY}</argument>
                 <argument>fintan.jp</argument>
               </arguments>
             </configuration>
