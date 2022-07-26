@@ -18,19 +18,24 @@
     <dependency>
       <groupId>com.microsoft.playwright</groupId>
       <artifactId>playwright</artifactId>
-      <version>1.23.0</version>
+      <version>1.24.0</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.8.2</version>
-      <scope>test</scope>
+      <version>5.9.0</version>
     </dependency>
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-launcher</artifactId>
-      <version>1.8.2</version>
+      <version>1.9.0</version>
     </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.36</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -74,6 +79,8 @@
 
             set HTTPS_PROXY=http://proxy.example.com:8080
             mvn exec:java@codegen-with-proxy
+
+            IntelliJから起動する場合は、Java OptionsのEnvironmental Variablesにて設定を行う。
           -->
           <execution>
             <id>codegen-with-proxy</id>
