@@ -27,19 +27,21 @@ public class TopPage {
 
     public void clickSearchIcon() {
         page.locator(".o-header__search > a").click();
-        Locator keywordInput = page.locator("[placeholder=\"気になるキーワードをいれてください\"]");
+        Locator keywordInput = getKeywordInput();
         assertThat(keywordInput).isVisible();
     }
 
     public void searchKeyword(String keyword) {
         clickSearchIcon();
 
-        // Fill [placeholder="気になるキーワードをいれてください"]
-        Locator keywordInput = page.locator("[placeholder=\"気になるキーワードをいれてください\"]");
-
+        Locator keywordInput = getKeywordInput();
         keywordInput.fill(keyword);
         keywordInput.click();
-        page.locator("button:has-text(\"検索\")").click();
+        page.locator("text=キーワードで探す 検索 >> button").click();
         assertThat(page).hasURL(fintan.url("/?s=" + keyword));
+    }
+
+    private Locator getKeywordInput() {
+        return page.locator("text=キーワードで探す 検索 >> [placeholder=\"気になるキーワードをいれてください\"]");
     }
 }

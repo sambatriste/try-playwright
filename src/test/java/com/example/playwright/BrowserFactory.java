@@ -6,7 +6,6 @@ import com.microsoft.playwright.Playwright;
 
 class BrowserFactory {
 
-
     Browser create(Playwright playwright) {
         var browserType = chooseBrowserType(playwright);
         var launchOptions = createLaunchOptions();
@@ -14,7 +13,13 @@ class BrowserFactory {
     }
 
     private BrowserType chooseBrowserType(Playwright playwright) {
-        return playwright.chromium();
+        String browserType = System.getProperty("playwright.browser-type", "chromium");
+        return switch (browserType) {
+            case "chromium" -> playwright.chromium();
+            case "firefox" -> playwright.firefox();
+            case "webkit" -> playwright.webkit();
+            default -> throw new IllegalArgumentException(browserType);
+        };
     }
 
     private BrowserType.LaunchOptions createLaunchOptions() {
