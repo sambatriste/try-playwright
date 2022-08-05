@@ -5,9 +5,15 @@
 Test Generator  
 https://playwright.dev/java/docs/codegen
 
+実行方法は以下の通り。
+
+### プロキシを使わない場合
+
 ``` sh
-mvn exec:java@codegen-with-proxy
+mvn exec:java@codegen
 ```
+
+### プロキシを使う場合
 
 プロキシ下で実行する場合は環境変数`HTTPS_PROXY`を設定しておく。
 
@@ -26,7 +32,7 @@ mvn exec:java@codegen-with-proxy
 設定値はシステムプロパティ、環境変数で上書きできる。
 
 
-## テスト実行時のオプション
+設定値はクラス`Configuration`に集約しているので、設定値の詳細はそちらを参照。
 
 ### ブラウザの選択
 
