@@ -1,5 +1,9 @@
 package com.example.pages;
 
+import com.example.config.Configuration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Fintanサイトの情報を集約するクラス。
  *
@@ -15,24 +19,23 @@ package com.example.pages;
  */
 public class Fintan {
 
+    private static Logger logger = LoggerFactory.getLogger(Fintan.class);
 
-    private static final String DEFAULT_URL = "https://fintan.jp";
-    private static final String FINTAN_URL_KEY = "fintan.url";
-
-
-    /**
-     * サイトのURL。
-     *
-     * 明示的に指定しない場合、本番環境（{@link #DEFAULT_URL}）が使用される。
-     */
+    /** サイトのURL。 */
     private final String url;
+
+    private static final Fintan soloInstance = new Fintan();
+
+    static Fintan getInstance() {
+        return soloInstance;
+    }
 
     /**
      * コンストラクタ。
      *
      * @param url サイトのURL
      */
-    public Fintan(String url) {
+    Fintan(String url) {
         this.url = url;
     }
 
@@ -40,8 +43,9 @@ public class Fintan {
      * コンストラクタ。
      *
      */
-    public Fintan() {
-        this(resolveUrl());
+    Fintan() {
+        this(Configuration.getFintanUrl());
+        logger.info("fintan.url = [" + this.url + "]");
     }
 
     public String url() {
@@ -56,7 +60,4 @@ public class Fintan {
         return url + relativePath;
     }
 
-    private static String resolveUrl() {
-        return System.getProperty(FINTAN_URL_KEY, DEFAULT_URL);
-    }
 }

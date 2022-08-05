@@ -1,10 +1,15 @@
 package com.example.playwright;
 
+import com.example.config.Configuration;
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Playwright;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class BrowserFactory {
+
+    private static Logger logger = LoggerFactory.getLogger(BrowserFactory.class);
 
     Browser create(Playwright playwright) {
         var browserType = chooseBrowserType(playwright);
@@ -13,7 +18,8 @@ class BrowserFactory {
     }
 
     private BrowserType chooseBrowserType(Playwright playwright) {
-        String browserType = System.getProperty("playwright.browser-type", "chromium");
+        String browserType = Configuration.getBrowserType();
+        logger.info("playwright.browser-type = [" + browserType + "]");
         return switch (browserType) {
             case "chromium" -> playwright.chromium();
             case "firefox" -> playwright.firefox();
@@ -31,7 +37,8 @@ class BrowserFactory {
     }
 
     private void registerProxy(BrowserType.LaunchOptions launchOptions) {
-        String proxyUrl = System.getenv("HTTPS_PROXY");
+        String proxyUrl = Configuration.getProxyUrl();
+        logger.info("https.proxy = [" + proxyUrl + "]");
         if (proxyUrl != null) {
             launchOptions.setProxy(proxyUrl);
         }

@@ -9,13 +9,10 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * トップページ。
  *
  */
-public class TopPage {
-
-    private final Fintan fintan = new Fintan();
-    private final Page page;
+public class TopPage extends PageTemplate {
 
     public TopPage(Page page) {
-        this.page = page;
+        super(page);
     }
 
     /**
@@ -27,41 +24,18 @@ public class TopPage {
     }
 
     /**
-     * 記事の総一覧リストのリンクをクリックする。
-     * /page/に遷移する。
+     * 最新記事のカード一覧を取得する。
+     * @return 最新記事のカード一覧（表示されているもののみ）
      */
-    public void clickAllPostListLink() {
-        page.locator("text=記事の総一覧リスト").click();
-        assertThat(page).hasURL(fintan.pageUrl());
-
+    public Locator getLatestArticleCards() {
+        return page.locator("section.c-top__latest.js-limit-latest > .o-inner > .o-card-list > .o-card:visible");
     }
 
     /**
-     * 検索アイコンをクリックする。
-     * 検索パネルが表示される。
+     * 最新記事の「もっと見る」リンクをクリックする。
      */
-    public void clickSearchIcon() {
-        page.locator(".o-header__search > a").click();
-        Locator keywordInput = getKeywordInput();
-        assertThat(keywordInput).isVisible();
+    public void clickLatestArticleReadMore() {
+        page.locator("text=もっと読む").first().click();
     }
 
-    /**
-     * キーワード検索を行う。
-     * 入力したキーワードで検索し、検索画面が表示される。
-     * @param keyword 入力するキーワード
-     */
-    public void searchKeyword(String keyword) {
-        clickSearchIcon();
-
-        Locator keywordInput = getKeywordInput();
-        keywordInput.fill(keyword);
-        keywordInput.click();
-        page.locator("text=キーワードで探す 検索 >> button").click();
-        assertThat(page).hasURL(fintan.url("/?s=" + keyword));
-    }
-
-    private Locator getKeywordInput() {
-        return page.locator("text=キーワードで探す 検索 >> [placeholder=\"気になるキーワードをいれてください\"]");
-    }
 }
