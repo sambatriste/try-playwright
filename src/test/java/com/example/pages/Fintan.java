@@ -11,10 +11,12 @@ import org.slf4j.LoggerFactory;
  * 本番環境、テスト環境、ローカル開発環境、いずれの環境に対してでも、
  * 同じテストコードでテストが実行できるようになる。
  *
- * システムプロパティ fintan.urlを設定しておくことで、FintanサイトのURLを変更することができる。
+ * 設定値 fintan.urlを設定しておくことで、FintanサイトのURLを変更することができる。
  *
  * （例）
  * {@code mvn -Dfintan.url=http://localhost:5000 test}
+ *
+ * @see Configuration#getFintanUrl()
  *
  */
 public class Fintan {

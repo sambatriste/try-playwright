@@ -2,11 +2,17 @@ package com.example.pages;
 
 import com.microsoft.playwright.Page;
 
-abstract class PageTemplate {
+/**
+ * ヘッダーとフッターを持つページテンプレートクラス。
+ *
+ * 一般的なレイアウトのページに対応するPage Objectを作成する場合は、
+ * 本クラスを継承するとよい。
+ */
+public abstract class PageTemplate {
 
-    final Fintan fintan = Fintan.getInstance();
+    protected final Fintan fintan = Fintan.getInstance();
 
-    final Page page;
+    protected final Page page;
 
     public final Header header;
 
