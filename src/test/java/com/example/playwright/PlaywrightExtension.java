@@ -53,6 +53,27 @@ public class PlaywrightExtension implements BeforeEachCallback, AfterEachCallbac
     }
 
     /**
+     * 初期化処理。
+     *
+     * {@link Playwright}と{@link Browser}の生成を行う。
+     */
+    private static void initialize() {
+        playwright = Playwright.create();
+        var browserFactory = new BrowserFactory();
+        browser = browserFactory.create(playwright);
+    }
+
+    /**
+     * 終了処理。
+     *
+     * {@link Playwright}と{@link Browser}のクローズを行う。
+     */
+    private static void terminate() {
+        browser.close();
+        playwright.close();
+    }
+
+    /**
      * {@link TestExecutionListener}実装クラス。
      *
      * Playwrightリソースの生成とクローズを行う。
@@ -61,28 +82,14 @@ public class PlaywrightExtension implements BeforeEachCallback, AfterEachCallbac
      */
     public static class PlaywrightExecutionListener implements TestExecutionListener {
 
-        private final BrowserFactory browserFactory = new BrowserFactory();
-
-        /**
-         * {@inheritDoc}
-         *
-         * {@link Playwright}と{@link Browser}の生成を行う。
-         */
         @Override
         public void testPlanExecutionStarted(TestPlan testPlan) {
-            playwright = Playwright.create();
-            browser = browserFactory.create(playwright);
+            initialize();
         }
 
-        /**
-         * {@inheritDoc}
-         *
-         * {@link Playwright}と{@link Browser}のクローズを行う。
-         */
         @Override
         public void testPlanExecutionFinished(TestPlan testPlan) {
-            browser.close();
-            playwright.close();
+            terminate();
         }
     }
 
