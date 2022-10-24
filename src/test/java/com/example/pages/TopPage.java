@@ -15,6 +15,10 @@ public class TopPage extends PageTemplate {
         super(page);
     }
 
+    public void setViewportSize(int width, int height) {
+        page.setViewportSize(width, height);
+    }
+
     /**
      * トップページに遷移する。
      */
