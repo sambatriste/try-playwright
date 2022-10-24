@@ -62,6 +62,18 @@ public class Header {
         assertThat(page).hasURL(fintan.url("/blog-category/"));
     }
 
+    /**
+     * ヘッダのカテゴリリンクをマウスホバーする。
+     */
+    public void hoverCategoryLink() {
+        Locator categoryLink = page.locator("text=Category カテゴリ");
+        Locator categoryMenu = page.locator(".sub-menu.js-menu");
+        assertThat(categoryMenu).not().isVisible();
+
+        categoryLink.hover();
+        assertThat(categoryMenu).isVisible();
+    }
+
     private Locator getKeywordInput() {
         return page.locator("text=キーワードで探す 検索 >> [placeholder=\"気になるキーワードをいれてください\"]");
     }
