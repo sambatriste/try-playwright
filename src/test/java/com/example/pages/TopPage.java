@@ -42,4 +42,31 @@ public class TopPage extends PageTemplate {
         page.locator("text=もっと読む").first().click();
     }
 
+    /**
+     * 最新記事の「短く表示する」ボタンをクリックする。
+     */
+    public void clickDisplayLatestArticlesShortly() {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator readMoreButton = page.locator("text=もっと読む").first();
+        Locator cards = topPage.getLatestArticleCards();
+        assertThat(cards).hasCount(8);
+
+        // 毎回Clickで記事が8個増える
+        readMoreButton.click();
+        assertThat(cards).hasCount(16);
+
+        readMoreButton.click();
+        assertThat(cards).hasCount(24);
+
+        // 記事が最大32個までに増える
+        readMoreButton.click();
+        assertThat(cards).hasCount(32);
+
+        Locator displayShortlyButton = page.locator("text=短く表示する").first();
+        // 32個まで増えたら「短く表示する」ボタンが出てくる
+        assertThat(displayShortlyButton).isVisible();
+        displayShortlyButton.click();
+        assertThat(cards).hasCount(8);
+    }
 }
