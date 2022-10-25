@@ -141,4 +141,26 @@ public class TopPageTest {
 
         assertThat(categoryMenuLinks).containsText(expectedCategoryNames);
     }
+
+    @Test
+    @DisplayName("キーワード検索欄に文字を入力すると検索ボタンが活性化する。入力しないと非活性化される")
+    void searchButtonBecomeEnabled(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator searchTextBox = page.locator("main [placeholder=\"気になるキーワードをいれてください\"]");
+        Locator searchButton = page.locator("main button:has-text(\"検索\")");
+
+        // 入力なしの場合、「class=js-search-button_search」、非活性化状態
+        assertThat(searchButton).hasClass("js-search-button_search");
+        assertThat(searchButton).not().hasClass("js-search-button_search searchable");
+
+        searchTextBox.click();
+        assertThat(searchButton).hasClass("js-search-button_search");
+        assertThat(searchButton).not().hasClass("js-search-button_search searchable");
+
+        searchTextBox.type("java");
+        // 入力した場合、「class=js-search-button_search searchable」、活性化状態
+        assertThat(searchButton).not().hasClass("js-search-button_search");
+        assertThat(searchButton).hasClass("js-search-button_search searchable");
+    }
 }
