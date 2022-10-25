@@ -46,10 +46,8 @@ public class TopPage extends PageTemplate {
      * 最新記事の「短く表示する」ボタンをクリックする。
      */
     public void clickDisplayLatestArticlesShortly() {
-        TopPage topPage = new TopPage(page);
-        topPage.navigate();
         Locator readMoreButton = page.locator("text=もっと読む").first();
-        Locator cards = topPage.getLatestArticleCards();
+        Locator cards = getLatestArticleCards();
         assertThat(cards).hasCount(8);
 
         // 毎回Clickで記事が8個増える
@@ -68,5 +66,15 @@ public class TopPage extends PageTemplate {
         assertThat(displayShortlyButton).isVisible();
         displayShortlyButton.click();
         assertThat(cards).hasCount(8);
+    }
+
+    public void searchKeyword(String keyword) {
+        Locator searchTextBox = page.locator("main [placeholder=\"気になるキーワードをいれてください\"]");
+        Locator searchButton = page.locator("main button:has-text(\"検索\")");
+
+        searchTextBox.click();
+        searchTextBox.type(keyword);
+        searchButton.click();
+        assertThat(page).hasURL(fintan.url("/?s=" + keyword));
     }
 }

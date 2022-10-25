@@ -15,7 +15,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("トップページからカテゴリ一覧ページに遷移できること")
-    void testAllCategoryList(Page page) {
+    void clickCategoryLink(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         topPage.header.clickCategoryLink();
@@ -23,7 +23,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("トップページから記事一覧に遷移できること")
-    void testAllPostsList(Page page) {
+    void clickAllPostListLink(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         topPage.footer.clickAllPostListLink();
@@ -31,7 +31,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("虫眼鏡から検索ウィンドウを開けること")
-    void searchIconOpen(Page page) {
+    void searchPanelOpen(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         topPage.header.searchKeyword("java");
@@ -80,7 +80,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("最新記事の「短く表示する」をクリックすると記事が追加で表示されること")
-    void displayShortly(Page page) {
+    void displayBlogsShortly(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         topPage.clickDisplayLatestArticlesShortly();
@@ -110,7 +110,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("リンク押下で該当記事に繊維できる")
+    @DisplayName("リンク押下で該当記事に遷移できる")
     void clickBlogLink(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -135,32 +135,38 @@ public class TopPageTest {
         topPage.navigate();
 
         Locator categoryMenuLinks = page.locator(".sub-menu.js-menu > ul > li > a");
-        String[] expectedCategoryNames = new String[] {"モバイルアプリケーション開発", "UX/UIデザイン", "Webアプリケーション開発", "先進技術研究", "新規事業開発", "その他のカテゴリ"};
-
         assertThat(categoryMenuLinks).hasCount(6);
 
+        String[] expectedCategoryNames = new String[] {"モバイルアプリケーション開発", "UX/UIデザイン", "Webアプリケーション開発", "先進技術研究", "新規事業開発", "その他のカテゴリ"};
         assertThat(categoryMenuLinks).containsText(expectedCategoryNames);
     }
 
     @Test
     @DisplayName("キーワード検索欄に文字を入力すると検索ボタンが活性化する。入力しないと非活性化される")
-    void searchButtonBecomeEnabled(Page page) {
+    void searchButtonBecomeSearchable(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
-        Locator searchTextBox = page.locator("main [placeholder=\"気になるキーワードをいれてください\"]");
+
         Locator searchButton = page.locator("main button:has-text(\"検索\")");
-
+        String unsearchableCssClass = "js-search-button_search";
+        String searchableCssClass = "js-search-button_search searchable";
         // 入力なしの場合、「class=js-search-button_search」、非活性化状態
-        assertThat(searchButton).hasClass("js-search-button_search");
-        assertThat(searchButton).not().hasClass("js-search-button_search searchable");
+        assertThat(searchButton).hasClass(unsearchableCssClass);
+        assertThat(searchButton).not().hasClass(searchableCssClass);
 
+        Locator searchTextBox = page.locator("main [placeholder=\"気になるキーワードをいれてください\"]");
         searchTextBox.click();
-        assertThat(searchButton).hasClass("js-search-button_search");
-        assertThat(searchButton).not().hasClass("js-search-button_search searchable");
-
         searchTextBox.type("java");
         // 入力した場合、「class=js-search-button_search searchable」、活性化状態
-        assertThat(searchButton).not().hasClass("js-search-button_search");
-        assertThat(searchButton).hasClass("js-search-button_search searchable");
+        assertThat(searchButton).not().hasClass(unsearchableCssClass);
+        assertThat(searchButton).hasClass(searchableCssClass);
+    }
+
+    @Test
+    @DisplayName("キーワード検索ができる")
+    void canSearchKeyword(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        topPage.searchKeyword("java");
     }
 }
