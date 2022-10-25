@@ -138,7 +138,7 @@ public class TopPageTest {
         assertThat(categoryMenuLinks).hasCount(6);
 
         String[] expectedCategoryNames = new String[] {"モバイルアプリケーション開発", "UX/UIデザイン", "Webアプリケーション開発", "先進技術研究", "新規事業開発", "その他のカテゴリ"};
-        assertThat(categoryMenuLinks).containsText(expectedCategoryNames);
+        assertThat(categoryMenuLinks).hasText(expectedCategoryNames);
     }
 
     @Test
