@@ -36,7 +36,7 @@ public class CategoryListPageTest {
     }
 
     @Test
-    @DisplayName("「記事一覧へ」で該当カテゴリのカテゴリトップに遷移できる")
+    @DisplayName("「記事一覧へ」で該当カテゴリのカテゴリトップに遷移できること")
     void clickAuthorIcon(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
         categoryListPage.navigate();

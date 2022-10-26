@@ -54,17 +54,24 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("横幅<=500px未満でハンバーガーメニューが出る")
+    @DisplayName("横幅<=500px未満でハンバーガーメニューが出ること")
     void displayHamburgerMenu(Page page) {
         TopPage topPage = new TopPage(page);
-        topPage.setViewportSize(500, 1280);
         topPage.navigate();
         Locator hamburgerMenu = page.locator(".o-hamburger.js-hamburger");
+        // デフォルトサイズが1280*720でハンバーガーメニューが出ない
+        assertThat(hamburgerMenu).not().isVisible();
+
+        topPage.setViewportSize(500, 1280);
         assertThat(hamburgerMenu).isVisible();
+
+        // 横幅>500pxでハンバーガーメニューが出ない
+        topPage.setViewportSize(501, 1280);
+        assertThat(hamburgerMenu).not().isVisible();
     }
 
     @Test
-    @DisplayName("検索窓を表示した状態でハンバーガーメニューの表示と非表示を切り替えられる")
+    @DisplayName("検索窓を表示した状態でハンバーガーメニューの表示と非表示を切り替えられること")
     void displayHamburgerMenuWithOpeningSearchPanel(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -78,25 +85,17 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("横幅>500pxでハンバーガーメニューが出ない")
-    void notDisplayHamburgerMenu(Page page) {
-        TopPage topPage = new TopPage(page);
-        topPage.setViewportSize(501, 1280);
-        topPage.navigate();
-        Locator hamburgerMenu = page.locator(".o-hamburger.js-hamburger");
-        assertThat(hamburgerMenu).not().isVisible();
-    }
-
-    @Test
-    @DisplayName("下にスクロールした時ヘッダが上部に出ない。上にスクロールした時ヘッダが上部に出る")
+    @DisplayName("下にスクロールした時ヘッダが上部に出ない。上にスクロールした時ヘッダが上部に出ること")
     void notDisplayHeaderWhenScrollDown(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator header = page.locator("header");
         assertThat(header).hasClass("o-header");
+        // ページを下方向に200ピクセルをスクロールする
         page.mouse().wheel(0, 200);
 
         assertThat(header).hasClass("o-header fix-over");
+        // ページを上方向に100ピクセルをスクロールする
         page.mouse().wheel(0, -100);
         assertThat(header).hasClass("o-header");
 
@@ -105,7 +104,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("記事リストの表示型が「タイル型とリスト型の間」に切り替えられる")
+    @DisplayName("記事リストの表示型が「タイル型とリスト型の間」に切り替えられること")
     void changeBetweenTileAndListDisplay(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -177,7 +176,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("最新記事リストの記事から一つの著者アイコンを押下し著者ページに遷移できる")
+    @DisplayName("最新記事リストの記事から一つの著者アイコンを押下し著者ページに遷移できること")
     void clickAuthorIcon(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -191,7 +190,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("リンク押下で該当記事に遷移できる")
+    @DisplayName("リンク押下で該当記事に遷移できること")
     void clickBlogLink(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -202,7 +201,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("Fintanロゴを押下しトップページに遷移できる")
+    @DisplayName("Fintanロゴを押下しトップページに遷移できること")
     void clickFintanLogo(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -231,7 +230,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("キーワード検索欄に文字を入力すると検索ボタンが活性化する。入力しないと非活性化される")
+    @DisplayName("キーワード検索欄に文字を入力すると検索ボタンが活性化する。入力しないと非活性化されること")
     void searchButtonBecomeSearchable(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
@@ -252,7 +251,7 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("キーワード検索ができる")
+    @DisplayName("キーワード検索ができること")
     void canSearchKeyword(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
