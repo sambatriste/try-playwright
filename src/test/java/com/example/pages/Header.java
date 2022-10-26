@@ -25,6 +25,11 @@ public class Header {
         assertThat(keywordInput).isVisible();
     }
 
+    public void clickFintanLogo() {
+        page.locator(".o-header__logo > a").click();
+        assertThat(page).hasURL(fintan.url() + "/");
+    }
+
     /**
      * 検索アイコンをクリックして表示してまたクリックで閉じる。
      * 検索パネルが表示されない。
@@ -60,6 +65,14 @@ public class Header {
     public void clickCategoryLink() {
         page.locator("text=Category カテゴリ").click();
         assertThat(page).hasURL(fintan.url("/blog-category/"));
+    }
+
+    /**
+     * ヘッダの「私たちについて」をクリックする。
+     */
+    public void clickAboutUsLink() {
+        page.locator("text=About us 私たちについて").click();
+        assertThat(page).hasURL(fintan.url("/about/"));
     }
 
     /**

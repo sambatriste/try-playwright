@@ -34,4 +34,19 @@ public class CategoryListPageTest {
 
         assertThat(categoryNameLinks).containsText(expectedCategoryNames);
     }
+
+    @Test
+    @DisplayName("「記事一覧へ」で該当カテゴリのカテゴリトップに遷移できる")
+    void clickAuthorIcon(Page page) {
+        CategoryListPage categoryListPage = new CategoryListPage(page);
+        categoryListPage.navigate();
+
+        // 「記事一覧へ」リンク
+        Locator blogListLink = page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a.link").first();
+        // 遷移先URL
+        String destinationUrl = blogListLink.getAttribute("href");
+
+        blogListLink.click();
+        assertThat(page).hasURL(destinationUrl);
+    }
 }

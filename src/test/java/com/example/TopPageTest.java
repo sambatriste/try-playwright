@@ -22,6 +22,14 @@ public class TopPageTest {
     }
 
     @Test
+    @DisplayName("ヘッダから「私たちについて」をクリックしに画面遷移できること")
+    void clickAboutUsLink(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        topPage.header.clickAboutUsLink();
+    }
+
+    @Test
     @DisplayName("トップページから記事一覧に遷移できること")
     void clickAllPostListLink(Page page) {
         TopPage topPage = new TopPage(page);
@@ -34,7 +42,7 @@ public class TopPageTest {
     void searchPanelOpen(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
-        topPage.header.searchKeyword("java");
+        topPage.header.clickSearchIcon();
     }
 
     @Test
@@ -56,6 +64,20 @@ public class TopPageTest {
     }
 
     @Test
+    @DisplayName("検索窓を表示した状態でハンバーガーメニューの表示と非表示を切り替えられる")
+    void displayHamburgerMenuWithOpeningSearchPanel(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        topPage.header.clickSearchIcon();
+        Locator hamburgerMenu = page.locator(".o-hamburger.js-hamburger");
+        // デフォルトサイズが1280*720でハンバーガーメニューが出ない
+        assertThat(hamburgerMenu).not().isVisible();
+
+        topPage.setViewportSize(500, 1280);
+        assertThat(hamburgerMenu).isVisible();
+    }
+
+    @Test
     @DisplayName("横幅>500pxでハンバーガーメニューが出ない")
     void notDisplayHamburgerMenu(Page page) {
         TopPage topPage = new TopPage(page);
@@ -63,6 +85,51 @@ public class TopPageTest {
         topPage.navigate();
         Locator hamburgerMenu = page.locator(".o-hamburger.js-hamburger");
         assertThat(hamburgerMenu).not().isVisible();
+    }
+
+    @Test
+    @DisplayName("下にスクロールした時ヘッダが上部に出ない。上にスクロールした時ヘッダが上部に出る")
+    void notDisplayHeaderWhenScrollDown(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator header = page.locator("header");
+        assertThat(header).hasClass("o-header");
+        page.mouse().wheel(0, 200);
+
+        assertThat(header).hasClass("o-header fix-over");
+        page.mouse().wheel(0, -100);
+        assertThat(header).hasClass("o-header");
+
+        page.mouse().wheel(0, -100);
+        assertThat(header).hasClass("o-header state-top");
+    }
+
+    @Test
+    @DisplayName("記事リストの表示型が「タイル型とリスト型の間」に切り替えられる")
+    void changeBetweenTileAndListDisplay(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        // 初期表示時、リスト型表示
+        Locator listButton = page.locator(".o-card-switch__button.o-card-switch__button--list").first();
+        assertThat(listButton).hasClass("o-card-switch__button o-card-switch__button--list js-view-switch_list is_active");
+
+        Locator tileButton = page.locator(".o-card-switch__button.o-card-switch__button--icon").first();
+        assertThat(tileButton).hasClass("o-card-switch__button o-card-switch__button--icon js-view-switch_icon");
+
+        Locator blogList = page.locator("section.c-top__latest.js-limit-latest > .o-inner > .o-card-list");
+        assertThat(blogList).hasClass("o-card-list o-card-list--list-view");
+
+        // タイル表示ボタン押下後、タイル型表示となる
+        tileButton.click();
+        assertThat(listButton).hasClass("o-card-switch__button o-card-switch__button--list js-view-switch_list");
+        assertThat(tileButton).hasClass("o-card-switch__button o-card-switch__button--icon js-view-switch_icon is_active");
+        assertThat(blogList).hasClass("o-card-list");
+
+        // リスト表示ボタン押下後、リスト表示に戻る
+        listButton.click();
+        assertThat(listButton).hasClass("o-card-switch__button o-card-switch__button--list js-view-switch_list is_active");
+        assertThat(tileButton).hasClass("o-card-switch__button o-card-switch__button--icon js-view-switch_icon");
+        assertThat(blogList).hasClass("o-card-list o-card-list--list-view");
     }
 
     @Test
@@ -110,6 +177,20 @@ public class TopPageTest {
     }
 
     @Test
+    @DisplayName("最新記事リストの記事から一つの著者アイコンを押下し著者ページに遷移できる")
+    void clickAuthorIcon(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+
+        // 著者アイコン
+        Locator authorIcon = page.locator("li.o-card > .o-card__content > .o-card__user > .image").first();
+        authorIcon.click();
+        // 遷移先URL
+        String destinationUrl = page.locator("li.o-card > .o-card__content > .o-card__user > .image > a").first().getAttribute("href");
+        assertThat(page).hasURL(destinationUrl);
+    }
+
+    @Test
     @DisplayName("リンク押下で該当記事に遷移できる")
     void clickBlogLink(Page page) {
         TopPage topPage = new TopPage(page);
@@ -118,6 +199,14 @@ public class TopPageTest {
         String destinationUrl = blogLink.getAttribute("href");
         blogLink.click();
         assertThat(page).hasURL(destinationUrl);
+    }
+
+    @Test
+    @DisplayName("Fintanロゴを押下しトップページに遷移できる")
+    void clickFintanLogo(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        topPage.header.clickFintanLogo();
     }
 
     @Test
