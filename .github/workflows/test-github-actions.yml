@@ -15,6 +15,6 @@ jobs:
       - name: Build & Install
         run: mvn -B install -D skipTests --no-transfer-progress
       - name: Install Playwright
-        run: mvn exec:java -e -Dplaywright.browser-type=firefox -Dfintan.url=https://fintan847816967.wpcomstaging.com Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
+        run: mvn exec:java -e Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps" -Dplaywright.browser-type=firefox -Dfintan.url=https://fintan847816967.wpcomstaging.com
       - name: Run tests
         run: mvn test
