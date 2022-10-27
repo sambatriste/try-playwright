@@ -19,32 +19,6 @@ class ConfigLoader {
 
     private static final String ENV_LOCAL = ".env.local";
 
-    private final Properties localProperties;
-
-    /**
-     * デフォルトコンストラクタ。
-     */
-    public ConfigLoader() {
-        this(loadLocalProperties());
-    }
-
-    /**
-     * コンストラクタ。
-     * @param localProperties 設定
-     */
-    public ConfigLoader(Properties localProperties) {
-        this.localProperties = localProperties;
-    }
-
-    /**
-     * 設定値を取得する。
-     * @param key キー
-     * @return 値
-     */
-    String get(String key) {
-        return get(key, null);
-    }
-
     /**
      * 設定値を取得する。
      * 設定が存在しない場合、デフォルト値が返却される。
@@ -64,7 +38,7 @@ class ConfigLoader {
             return envVar;
         }
 
-        String local = this.localProperties.getProperty(key);
+        String local = loadLocalProperties().getProperty(key);
         if (local != null) {
             return local;
         }

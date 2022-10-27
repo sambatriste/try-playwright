@@ -19,7 +19,7 @@ public class Configuration {
      * @return プロキシURL（設定されていない場合、null）
      */
     public static String getProxyUrl() {
-        return configLoader.get("https.proxy");
+        return configLoader.get("https.proxy", null);
     }
 
     /**
