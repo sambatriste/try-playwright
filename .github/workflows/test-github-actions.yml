@@ -1,10 +1,8 @@
 name: Playwright Tests
 run-name: ${{ github.actor }} is running Playwright Tests
 on:
-  push:
-    branches: [ feature-add-test-case ]
-#  schedule:
-#    - cron:  '30 8,17 * * *'
+  schedule:
+    - cron:  '30 8,17 * * *'
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
