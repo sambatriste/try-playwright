@@ -17,4 +17,4 @@ jobs:
       - name: Install Playwright
         run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
       - name: Run tests
-        run: mvn -Dplaywright.browser-type=firefox -Dfintan.url=https://fintan847816967.wpcomstaging.com test
+        run: mvn -Dplaywright.browser-type=firefox -Dhttps.proxy= -Dfintan.url=https://fintan847816967.wpcomstaging.com test

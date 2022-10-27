@@ -6,6 +6,7 @@ import java.io.Reader;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Properties;
 
@@ -57,7 +58,7 @@ class ConfigLoader {
         var properties = new Properties();
         try (Reader reader = Files.newBufferedReader(Paths.get(ENV_LOCAL), StandardCharsets.UTF_8)){
             properties.load(reader);
-        } catch (FileNotFoundException e) {
+        } catch (NoSuchFileException | FileNotFoundException e) {
             // ファイルが存在しない場合は何もしない。
         } catch (IOException e) {
             throw new UncheckedIOException(e);
