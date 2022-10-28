@@ -2,7 +2,7 @@ name: Playwright Tests
 run-name: ${{ github.actor }} is running Playwright Tests
 on:
   schedule:
-    - cron:  '30 8,17 * * *' # 8:30と17:30に動く
+    - cron:  '10 24,7 * * *' # UTC 24:10と7:10に(JST 9:10と16:10)動く
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
