@@ -1,5 +1,4 @@
 name: Playwright Tests
-run-name: ${{ github.actor }} is running Playwright Tests
 on:
   schedule:
     - cron:  '0/10 * * * *' # UTC 00:30と7:30に(JST 9:30と16:30)動く
