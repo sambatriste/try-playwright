@@ -13,6 +13,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @ExtendWith(PlaywrightExtension.class)
 public class TopPageTest {
 
+    private static final String FINTAN_PROD_URL = "https://fintan.jp";
+
     @Test
     @DisplayName("トップページからカテゴリ一覧ページに遷移できること")
     void clickCategoryLink(Page page) {
@@ -226,6 +228,9 @@ public class TopPageTest {
         assertThat(categoryMenuLinks).hasCount(6);
 
         String[] expectedCategoryNames = new String[] {"モバイルアプリケーション開発", "UX/UIデザイン", "Webアプリケーション開発", "先進技術研究", "新規事業開発", "その他のカテゴリ"};
+        if (topPage.fintan.url().equals(FINTAN_PROD_URL)) {
+            expectedCategoryNames = new String[] {"Webアプリケーション開発", "モバイルアプリケーション開発", "新規事業開発", "先進技術研究", "UX/UIデザイン", "その他のカテゴリ"};
+        }
         assertThat(categoryMenuLinks).hasText(expectedCategoryNames);
     }
 
