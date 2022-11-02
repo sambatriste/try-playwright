@@ -1,5 +1,6 @@
 package com.example.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -20,5 +21,13 @@ public class CategoryListPage extends PageTemplate {
     public void navigate() {
         page.navigate(fintan.url("/blog-category/"));
         assertThat(page).hasTitle("記事カテゴリ | Fintan");
+    }
+
+    public Locator getCategoryNameLinks() {
+        return page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a > h3");
+    }
+
+    public Locator getBlogListLink() {
+        return page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a.link").first();
     }
 }
