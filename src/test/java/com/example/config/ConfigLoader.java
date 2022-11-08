@@ -6,6 +6,7 @@ import java.io.Reader;
 import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.Properties;
 
@@ -18,32 +19,6 @@ import java.util.Properties;
 class ConfigLoader {
 
     private static final String ENV_LOCAL = ".env.local";
-
-    private final Properties localProperties;
-
-    /**
-     * デフォルトコンストラクタ。
-     */
-    public ConfigLoader() {
-        this(loadLocalProperties());
-    }
-
-    /**
-     * コンストラクタ。
-     * @param localProperties 設定
-     */
-    public ConfigLoader(Properties localProperties) {
-        this.localProperties = localProperties;
-    }
-
-    /**
-     * 設定値を取得する。
-     * @param key キー
-     * @return 値
-     */
-    String get(String key) {
-        return get(key, null);
-    }
 
     /**
      * 設定値を取得する。
@@ -64,7 +39,7 @@ class ConfigLoader {
             return envVar;
         }
 
-        String local = this.localProperties.getProperty(key);
+        String local = loadLocalProperties().getProperty(key);
         if (local != null) {
             return local;
         }
@@ -83,7 +58,7 @@ class ConfigLoader {
         var properties = new Properties();
         try (Reader reader = Files.newBufferedReader(Paths.get(ENV_LOCAL), StandardCharsets.UTF_8)){
             properties.load(reader);
-        } catch (FileNotFoundException e) {
+        } catch (NoSuchFileException | FileNotFoundException e) {
             // ファイルが存在しない場合は何もしない。
         } catch (IOException e) {
             throw new UncheckedIOException(e);
