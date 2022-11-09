@@ -19,6 +19,5 @@ public class AuthorBlogListPageTest {
 
         var authorNames = List.of("XRチーム", "協業開発チーム", "新規事業開発チーム");
         authorNames.forEach(authorName -> authorBlogListPage.navigate(authorName));
-
     }
 }
