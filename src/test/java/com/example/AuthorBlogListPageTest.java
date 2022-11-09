@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.List;
+
 @ExtendWith(PlaywrightExtension.class)
 public class AuthorBlogListPageTest {
 
@@ -15,10 +17,8 @@ public class AuthorBlogListPageTest {
     void hasCorrectTitle(Page page) {
         AuthorBlogListPage authorBlogListPage = new AuthorBlogListPage(page);
 
-        String[] authorNames = new String[] {"XRチーム", "協業開発チーム", "新規事業開発チーム"};
+        var authorNames = List.of("XRチーム", "協業開発チーム", "新規事業開発チーム");
+        authorNames.forEach(authorName -> authorBlogListPage.navigate(authorName));
 
-        for (String authorName : authorNames) {
-            authorBlogListPage.navigate(authorName);
-        }
     }
 }

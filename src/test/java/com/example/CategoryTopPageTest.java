@@ -18,13 +18,12 @@ public class CategoryTopPageTest {
     void hasCorrectTitle(Page page) {
         CategoryTopPage categoryTopPage = new CategoryTopPage(page);
 
-        Map<String, String> categoryPathNameMap = new HashMap<>();
-        categoryPathNameMap.put("technical-research", "先進技術研究");
-        categoryPathNameMap.put("mobile-application", "モバイルアプリケーション開発");
-        categoryPathNameMap.put("web-application", "Webアプリケーション開発");
+        Map<String, String> categoryPathNameMap = Map.of(
+            "technical-research", "先進技術研究",
+            "mobile-application", "モバイルアプリケーション開発",
+            "web-application", "Webアプリケーション開発"
+        );
 
-        for (Map.Entry<String, String> entry : categoryPathNameMap.entrySet()) {
-            categoryTopPage.navigate(entry.getKey(), entry.getValue());
-        }
+        categoryPathNameMap.forEach((path, name) -> categoryTopPage.navigate(path, name));
     }
 }

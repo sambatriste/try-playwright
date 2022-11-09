@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.List;
+
 @ExtendWith(PlaywrightExtension.class)
 public class TagTopPageTest {
 
@@ -15,10 +17,7 @@ public class TagTopPageTest {
     void hasCorrectTitle(Page page) {
         TagTopPage tagTopPage = new TagTopPage(page);
 
-        String[] tagNames = new String[] {"XR", "スクラム開発", "イベント"};
-
-        for (String tagName: tagNames) {
-            tagTopPage.navigate(tagName);
-        }
+        var tagNames = List.of("XR", "スクラム開発", "イベント");
+        tagNames.forEach(tagName -> tagTopPage.navigate(tagName));
     }
 }

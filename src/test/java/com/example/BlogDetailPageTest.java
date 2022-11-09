@@ -23,17 +23,17 @@ public class BlogDetailPageTest {
     void hasCorrectTitle(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
 
-        Map<String, String> idTitleMap = new HashMap<>();
-        idTitleMap.put("501", "VirtualCollaboBase");
-        idTitleMap.put("163", "モバイルアプリケーションの配布");
-        idTitleMap.put("1435", "Springアプリ開発ノウハウ集");
+        var idTitleMap = Map.of(
+            "501", "VirtualCollaboBase",
+            "163", "モバイルアプリケーションの配布",
+            "1435", "Springアプリ開発ノウハウ集",
+            INQUIRY_PAGE_ID, "お問い合わせ",
+            WHEN_USING_THIS_SITE_PAGE_ID, "当サイトのご利用にあたって",
+            ABOUT_TRADEMARK_PAGE_ID, "商標について",
+            LICENSE_PAGE_ID, "ライセンス"
 
-        idTitleMap.put(INQUIRY_PAGE_ID, "お問い合わせ");
-        idTitleMap.put(WHEN_USING_THIS_SITE_PAGE_ID, "当サイトのご利用にあたって");
-        idTitleMap.put(ABOUT_TRADEMARK_PAGE_ID, "商標について");
-        idTitleMap.put(LICENSE_PAGE_ID, "ライセンス");
-        for (Map.Entry<String, String> entry : idTitleMap.entrySet()) {
-            blogDetailPage.navigate(entry.getKey(), entry.getValue());
-        }
+        );
+
+        idTitleMap.forEach((id, title) -> blogDetailPage.navigate(id, title));
     }
 }

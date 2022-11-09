@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import java.util.List;
+
 @ExtendWith(PlaywrightExtension.class)
 public class SearchResultPageTest {
 
@@ -15,10 +17,7 @@ public class SearchResultPageTest {
     void hasCorrectTitle(Page page) {
         SearchResultPage searchResultPage = new SearchResultPage(page);
 
-        String[] keywords = new String[] {"XR", "java", "spring"};
-
-        for (String keyword: keywords) {
-            searchResultPage.navigate(keyword);
-        }
+        var keywords = List.of("XR", "java", "spring");
+        keywords.forEach(keyword -> searchResultPage.navigate(keyword));
     }
 }
