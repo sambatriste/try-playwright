@@ -13,7 +13,7 @@ import java.util.List;
 public class AuthorBlogListPageTest {
 
     @Test
-    @DisplayName("著者の記事一覧ページのタイルが正しい内容であること")
+    @DisplayName("著者の記事一覧ページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         AuthorBlogListPage authorBlogListPage = new AuthorBlogListPage(page);
 

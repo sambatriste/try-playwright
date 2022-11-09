@@ -13,7 +13,7 @@ import java.util.List;
 public class SearchResultPageTest {
 
     @Test
-    @DisplayName("検索結果ページのタイルが正しい内容であること")
+    @DisplayName("検索結果ページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         SearchResultPage searchResultPage = new SearchResultPage(page);
 

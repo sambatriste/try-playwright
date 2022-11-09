@@ -13,7 +13,7 @@ import java.util.Map;
 public class CategoryTopPageTest {
 
     @Test
-    @DisplayName("カテゴリトップページのタイルが正しい内容であること")
+    @DisplayName("カテゴリトップページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         CategoryTopPage categoryTopPage = new CategoryTopPage(page);
 

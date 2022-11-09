@@ -13,7 +13,7 @@ import java.util.Map;
 public class SingleBlogPageTest {
 
     @Test
-    @DisplayName("固定ページの各ページのタイルが正しい内容であること")
+    @DisplayName("固定ページの各ページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         SingleBlogPage singleBlogPage = new SingleBlogPage(page);
 

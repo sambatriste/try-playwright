@@ -11,7 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 public class AllBlogListPageTest {
 
     @Test
-    @DisplayName("記事の総一覧リストページのタイルが正しい内容であること")
+    @DisplayName("記事の総一覧リストページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         AllBlogListPage allBlogListPage = new AllBlogListPage(page);
         allBlogListPage.navigate();

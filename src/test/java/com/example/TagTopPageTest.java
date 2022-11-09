@@ -13,7 +13,7 @@ import java.util.List;
 public class TagTopPageTest {
 
     @Test
-    @DisplayName("タグトップページのタイルが正しい内容であること")
+    @DisplayName("タグトップページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         TagTopPage tagTopPage = new TagTopPage(page);
 

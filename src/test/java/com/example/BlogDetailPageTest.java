@@ -18,7 +18,7 @@ public class BlogDetailPageTest {
     private static final String LICENSE_PAGE_ID = "295";
 
     @Test
-    @DisplayName("記事詳細ページのタイルが正しい内容であること")
+    @DisplayName("記事詳細ページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
 
