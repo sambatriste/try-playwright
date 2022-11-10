@@ -1,7 +1,7 @@
 package com.example.config;
 
 public class Configuration {
-
+    public static String PRODUCTION_URL = "https://fintan.jp";
     private static final ConfigLoader configLoader = new ConfigLoader();
 
     /**
@@ -11,7 +11,18 @@ public class Configuration {
      * @return URL
      */
     public static String getFintanUrl() {
-        return configLoader.get("fintan.url", "https://fintan.jp");
+        return configLoader.get("fintan.url", PRODUCTION_URL);
+    }
+
+    /**
+     * テスト対象が本番環境であるか判定する。
+     * {@link #getFintanUrl()}で取得したURLが本番環境のURL({@link #PRODUCTION_URL})と一致した場合、
+     * 本番環境を対象としたテストとみなす。
+     *
+     * @return テスト対象が本番環境の場合、真
+     */
+    public static boolean isProductionEnvironment() {
+        return getFintanUrl().equals(PRODUCTION_URL);
     }
 
     /**
