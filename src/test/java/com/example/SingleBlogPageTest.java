@@ -44,7 +44,7 @@ public class SingleBlogPageTest {
     void hasCorrectTitle(Page page) {
         SingleBlogPage singleBlogPage = new SingleBlogPage(page);
 
-        var blogPathTitleMap = Map.of(
+        Map<String, String> blogPathTitleMap = Map.of(
             ABOUT_PAGE_PATH, ABOUT_PAGE_TITLE,
             BLOG_CATEGORY_PAGE_PATH, BLOG_CATEGORY_PAGE_TITLE,
             FOR_ARCHITECT_PAGE_PATH, FOR_ARCHITECT_PAGE_TITLE,
