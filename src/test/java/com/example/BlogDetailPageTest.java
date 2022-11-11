@@ -32,7 +32,8 @@ public class BlogDetailPageTest {
             INQUIRY_PAGE_ID, "お問い合わせ",
             WHEN_USING_THIS_SITE_PAGE_ID, "当サイトのご利用にあたって",
             ABOUT_TRADEMARK_PAGE_ID, "商標について",
-            LICENSE_PAGE_ID, "ライセンス"
+            LICENSE_PAGE_ID, "ライセンス",
+            FAQ_PAGE_ID, "ＦＡＱ（よくあるご質問）"
         );
 
         idTitleMap.forEach((id, title) -> blogDetailPage.navigate(id, title));
@@ -47,7 +48,7 @@ public class BlogDetailPageTest {
             "501", "VR遠隔コラボレーションツールのベースとなるシステム～VirtualCollaboBaseを紹介します。",
             "163", "モバイルアプリケーションのテストにおけるテスト担当者へのアプリ配布方法・手順を、テストのユースケースごとに紹介しています。",
             "1435", "Springを活用してアプリケーションを構築する際に必要となるノウハウを提供します。特に、アプリケーションを開発する際に公式ドキュメントやWeb上から実装方法を見つけることが難しく、躓きやすい点についての情報を中心に提供します。",
-            INQUIRY_PAGE_ID, "お問い合わせページです。",
+            INQUIRY_PAGE_ID, "お問い合わせページです。" + META_DESCRIPTION,
             WHEN_USING_THIS_SITE_PAGE_ID, "当サイトのご利用についてはこちらのページをご覧ください。" + META_DESCRIPTION,
             ABOUT_TRADEMARK_PAGE_ID, "商標についてはこちらのページをご覧ください。" + META_DESCRIPTION,
             LICENSE_PAGE_ID, "ライセンスについてはこちらのページをご覧ください。" + META_DESCRIPTION,

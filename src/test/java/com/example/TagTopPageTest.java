@@ -30,7 +30,7 @@ public class TagTopPageTest {
 
         tagNames.forEach(tagName -> {
             tagTopPage.navigate(tagName);
-            String expectMetaDescription = "#" + tagName + "の記事一覧です。" + META_DESCRIPTION;
+            String expectMetaDescription = "#" + tagName + "の記事一覧ページです。" + META_DESCRIPTION;
             String actualMetaDescription = page.locator("[name=description][content]").first().getAttribute("content");
             assertEquals(expectMetaDescription, actualMetaDescription);
         });
