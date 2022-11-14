@@ -9,11 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PlaywrightExtension.class)
 public class TopPageTest {
 
     private static final String FINTAN_PROD_URL = "https://fintan.jp";
+    private static final String META_DESCRIPTION = "Fintanは、TISインテックグループが研究開発や、システム開発、新規事業開発のプロジェクトで培ったノウハウを集約したサイトです。研究成果や、PJ推進のプラクティス、要件定義/設計/プログラミング/テストといった作業のプラクティス、成果物のテンプレート/サンプル、各種開発ツールを提供します。Fintanは、どなたでも無償でご利用いただけます。";
 
     @Test
     @DisplayName("トップページからカテゴリ一覧ページに遷移できること")
@@ -261,5 +263,17 @@ public class TopPageTest {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         topPage.searchKeyword("java");
+    }
+
+    @Test
+    @DisplayName("metaタグのdescriptionが正しい内容であること")
+    void hasCorrectMetaDescription(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator metaDescription = page.locator("[name=description][content]");
+        // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
+        assertThat(metaDescription).hasCount(1);
+        String actualMetaDescription = metaDescription.first().getAttribute("content");
+        assertEquals(META_DESCRIPTION, actualMetaDescription);
     }
 }

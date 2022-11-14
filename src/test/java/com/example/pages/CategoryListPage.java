@@ -20,6 +20,9 @@ public class CategoryListPage extends PageTemplate {
      */
     public void navigate() {
         page.navigate(fintan.url("/blog-category/"));
+        Locator title = page.locator("title");
+        // AIOSEOのプラグインにより、titleが複数になってしまうことがある
+        assertThat(title).hasCount(1);
         assertThat(page).hasTitle("記事カテゴリ | Fintan");
     }
 
