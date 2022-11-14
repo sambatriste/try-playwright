@@ -276,4 +276,15 @@ public class TopPageTest {
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(META_DESCRIPTION, actualMetaDescription);
     }
+
+    @Test
+    @DisplayName("h2タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator h2Tags = page.locator("h2");
+        assertThat(h2Tags).hasCount(8);
+        String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ", "", ""};
+        assertThat(h2Tags).containsText(h2TagTexts);
+    }
 }

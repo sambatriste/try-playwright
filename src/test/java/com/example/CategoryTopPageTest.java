@@ -34,7 +34,7 @@ public class CategoryTopPageTest {
         Map<String, String> categoryPathExcerptMap = Map.of(
             "technical-research", "TIS株式会社　先進技術研究チームが取り組む研究に関する活動・レポートをご紹介します。",
             "mobile-application", "TIS株式会社　テクノロジー＆イノベーション本部・モバイル開発チームがモバイル開発を実践する中で得たノウハウ・TIPS・サンプルとなる情報をご紹介します。",
-            "web-application", "長年Webアプリケーション開発のアーキテクト・フルスタックエンジニアとして携わってきたTIS株式会社　テクノロジー＆イノベーション本部 エンジニアチームが、開発プロジェクトの実践を通じて培った開発ノウハウ・実践の中で活用するFW・ガイド・ツールをご紹介します。"
+            "web-application", "長年Webアプリケーション開発のアーキテクト・フルスタックエンジニアとして携わってきたTIS株式会社　テクノロジー＆イノベーション本部　エンジニアチームが、開発プロジェクトの実践を通じて培った開発ノウハウ・実践の中で活用するFW・ガイド・ツールをご紹介します。"
         );
 
         categoryPathExcerptMap.forEach((path, excerpt) -> categoryTopPage.hasCorrectMetaDescription(path, excerpt));
