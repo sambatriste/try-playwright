@@ -270,7 +270,10 @@ public class TopPageTest {
     void hasCorrectMetaDescription(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
-        String metaDescription = page.locator("[name=description][content]").first().getAttribute("content");
-        assertEquals(metaDescription, META_DESCRIPTION);
+        Locator metaDescription = page.locator("[name=description][content]");
+        // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
+        assertThat(metaDescription).hasCount(1);
+        String actualMetaDescription = metaDescription.first().getAttribute("content");
+        assertEquals(META_DESCRIPTION, actualMetaDescription);
     }
 }

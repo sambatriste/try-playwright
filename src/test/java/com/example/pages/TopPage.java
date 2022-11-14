@@ -24,6 +24,9 @@ public class TopPage extends PageTemplate {
      */
     public void navigate() {
         page.navigate(fintan.url());
+        Locator title = page.locator("title");
+        // AIOSEOのプラグインにより、titleが複数になってしまうことがある
+        assertThat(title).hasCount(1);
         assertThat(page).hasTitle("Fintan");
     }
 

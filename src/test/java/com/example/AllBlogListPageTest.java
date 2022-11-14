@@ -2,11 +2,13 @@ package com.example;
 
 import com.example.pages.AllBlogListPage;
 import com.example.playwright.PlaywrightExtension;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PlaywrightExtension.class)
@@ -26,7 +28,10 @@ public class AllBlogListPageTest {
 
         allBlogListPage.navigate();
         String expectMetaDescription = "記事の総一覧リストページです。" + META_DESCRIPTION;
-        String actualMetaDescription = page.locator("[name=description][content]").first().getAttribute("content");
+        Locator metaDescription = page.locator("[name=description][content]");
+        // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
+        assertThat(metaDescription).hasCount(1);
+        String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
     }
 }

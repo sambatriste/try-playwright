@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.pages.TagTopPage;
 import com.example.playwright.PlaywrightExtension;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PlaywrightExtension.class)
@@ -30,8 +32,11 @@ public class TagTopPageTest {
 
         tagNames.forEach(tagName -> {
             tagTopPage.navigate(tagName);
+            Locator metaDescription = page.locator("[name=description][content]");
+            // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
+            assertThat(metaDescription).hasCount(1);
             String expectMetaDescription = "#" + tagName + "の記事一覧ページです。" + META_DESCRIPTION;
-            String actualMetaDescription = page.locator("[name=description][content]").first().getAttribute("content");
+            String actualMetaDescription = metaDescription.first().getAttribute("content");
             assertEquals(expectMetaDescription, actualMetaDescription);
         });
     }

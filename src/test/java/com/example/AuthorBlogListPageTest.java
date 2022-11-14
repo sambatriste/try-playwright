@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.pages.AuthorBlogListPage;
 import com.example.playwright.PlaywrightExtension;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.List;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PlaywrightExtension.class)
@@ -30,7 +32,10 @@ public class AuthorBlogListPageTest {
         authorNames.forEach(authorName -> {
             authorBlogListPage.navigate(authorName);
             String expectMetaDescription = "著者：" + authorName + "の記事一覧ページです。" + META_DESCRIPTION;
-            String actualMetaDescription = page.locator("[name=description][content]").first().getAttribute("content");
+            Locator metaDescription = page.locator("[name=description][content]");
+            // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
+            assertThat(metaDescription).hasCount(1);
+            String actualMetaDescription = metaDescription.first().getAttribute("content");
             assertEquals(expectMetaDescription, actualMetaDescription);
         });
     }
