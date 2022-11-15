@@ -279,7 +279,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("h2タグが正しい内容であること")
-    void hasCorrectH1tag(Page page) {
+    void hasCorrectH2tag(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h2");
