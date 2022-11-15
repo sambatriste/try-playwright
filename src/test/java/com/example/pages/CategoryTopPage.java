@@ -32,4 +32,11 @@ public class CategoryTopPage extends PageTemplate {
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
     }
+
+    public void hasCorrectH1Tag(String categoryPath, String categoryName) {
+        page.navigate(fintan.url("/blog-category/" + categoryPath + "/"));
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText(categoryName);
+    }
 }

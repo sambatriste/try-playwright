@@ -68,4 +68,14 @@ public class CategoryListPageTest {
         blogListLink.click();
         assertThat(page).hasURL(destinationUrl);
     }
+
+    @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        CategoryListPage categoryListPage = new CategoryListPage(page);
+        categoryListPage.navigate();
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText("Category");
+    }
 }

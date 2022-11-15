@@ -12,16 +12,16 @@ import java.util.Map;
 @ExtendWith(PlaywrightExtension.class)
 public class CategoryTopPageTest {
 
+    private static final Map<String, String> categoryPathNameMap = Map.of(
+        "technical-research", "先進技術研究",
+        "mobile-application", "モバイルアプリケーション開発",
+        "web-application", "Webアプリケーション開発"
+    );
+
     @Test
     @DisplayName("カテゴリトップページのタイトルが正しい内容であること")
     void hasCorrectTitle(Page page) {
         CategoryTopPage categoryTopPage = new CategoryTopPage(page);
-
-        Map<String, String> categoryPathNameMap = Map.of(
-            "technical-research", "先進技術研究",
-            "mobile-application", "モバイルアプリケーション開発",
-            "web-application", "Webアプリケーション開発"
-        );
 
         categoryPathNameMap.forEach((path, name) -> categoryTopPage.navigate(path, name));
     }
@@ -38,5 +38,13 @@ public class CategoryTopPageTest {
         );
 
         categoryPathExcerptMap.forEach((path, excerpt) -> categoryTopPage.hasCorrectMetaDescription(path, excerpt));
+    }
+
+    @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        CategoryTopPage categoryTopPage = new CategoryTopPage(page);
+
+        categoryPathNameMap.forEach((path, name) -> categoryTopPage.hasCorrectH1Tag(path, name));
     }
 }
