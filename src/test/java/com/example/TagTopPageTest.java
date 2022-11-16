@@ -40,4 +40,12 @@ public class TagTopPageTest {
             assertEquals(expectMetaDescription, actualMetaDescription);
         });
     }
+
+    @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        TagTopPage tagTopPage = new TagTopPage(page);
+
+        tagNames.forEach(tagName -> tagTopPage.hasCorrectH1tag(tagName));
+    }
 }

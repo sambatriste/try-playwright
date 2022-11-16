@@ -34,4 +34,15 @@ public class AllBlogListPageTest {
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
     }
+
+    @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        AllBlogListPage allBlogListPage = new AllBlogListPage(page);
+
+        allBlogListPage.navigate();
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText("記事の総一覧リスト");
+    }
 }

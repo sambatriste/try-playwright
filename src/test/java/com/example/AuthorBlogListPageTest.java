@@ -39,4 +39,11 @@ public class AuthorBlogListPageTest {
             assertEquals(expectMetaDescription, actualMetaDescription);
         });
     }
+
+    @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        AuthorBlogListPage authorBlogListPage = new AuthorBlogListPage(page);
+        authorNames.forEach(authorName -> authorBlogListPage.hasCorrectH1tag(authorName));
+    }
 }

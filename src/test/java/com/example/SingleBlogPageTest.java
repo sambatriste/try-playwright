@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.EnabledOnEnvironment;
 import com.example.pages.SingleBlogPage;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Page;
@@ -40,8 +41,9 @@ public class SingleBlogPageTest {
     private static final String NEW_GRAD_PAGE_TITLE = "職場・働き方紹介（学生向け）";
 
     @Test
-    @DisplayName("固定ページの各ページのタイトルが正しい内容であること")
-    void hasCorrectTitle(Page page) {
+    @DisplayName("本番環境固定ページの各ページのタイトルが正しい内容であること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境のアーキテクトページ、バックエンドエンジニアページの記事データがないため")
+    void hasCorrectTitleProductionEnv(Page page) {
         SingleBlogPage singleBlogPage = new SingleBlogPage(page);
 
         Map<String, String> blogPathTitleMap = Map.of(
@@ -50,6 +52,25 @@ public class SingleBlogPageTest {
             FOR_ARCHITECT_PAGE_PATH, FOR_ARCHITECT_PAGE_TITLE,
             FOR_FRONTEND_ENGINEER_PAGE_PATH, FOR_FRONTEND_ENGINEER_PAGE_TITLE,
             FOR_BACKEND_ENGINEER_PAGE_PATH, FOR_BACKEND_ENGINEER_PAGE_TITLE,
+            FOR_MOBILE_ENGINEER_PAGE_PATH, FOR_MOBILE_ENGINEER_PAGE__TITLE,
+            FOR_DESIGNER_PAGE_PATH, FOR_DESIGNER_PAGE_TITLE,
+            FOR_NEW_BIZ_STARTER_PAGE_PATH, FOR_NEW_BIZ_STARTER_PAGE_TITLE,
+            NEW_GRAD_PAGE_PATH, NEW_GRAD_PAGE_TITLE
+        );
+
+        blogPathTitleMap.forEach((path, title) -> singleBlogPage.navigate(path, title));
+    }
+
+    @Test
+    @DisplayName("テスト環境固定ページの各ページのタイトルが正しい内容であること")
+    @EnabledOnEnvironment(production = false, reason = "テスト環境のアーキテクトページ、バックエンドエンジニアページの記事データがないため")
+    void hasCorrectTitleTestEnv(Page page) {
+        SingleBlogPage singleBlogPage = new SingleBlogPage(page);
+
+        Map<String, String> blogPathTitleMap = Map.of(
+            ABOUT_PAGE_PATH, ABOUT_PAGE_TITLE,
+            BLOG_CATEGORY_PAGE_PATH, BLOG_CATEGORY_PAGE_TITLE,
+            FOR_FRONTEND_ENGINEER_PAGE_PATH, FOR_FRONTEND_ENGINEER_PAGE_TITLE,
             FOR_MOBILE_ENGINEER_PAGE_PATH, FOR_MOBILE_ENGINEER_PAGE__TITLE,
             FOR_DESIGNER_PAGE_PATH, FOR_DESIGNER_PAGE_TITLE,
             FOR_NEW_BIZ_STARTER_PAGE_PATH, FOR_NEW_BIZ_STARTER_PAGE_TITLE,
@@ -103,5 +124,22 @@ public class SingleBlogPageTest {
 
         String expectMetaDescription = "Fintanでは技術情報以外にも、活動発信として職場紹介・働き方紹介記事も公開しています。就職活動中の学生さんに向けて、TISのエンジニア組織の職場・働き方を知っていただけるような記事を厳選しました。";
         singleBlogPage.hasCorrectMetaDescription(NEW_GRAD_PAGE_PATH, expectMetaDescription);
+    }
+
+    @Test
+    @DisplayName("各おすすめ記事固定ページ、及び新卒向け紹介ページ、h1タグが正しい内容であること")
+    void hasCorrectH1tag(Page page) {
+        SingleBlogPage singleBlogPage = new SingleBlogPage(page);
+        Map<String, String> blogPagePathTitleMap = Map.of(
+            FOR_ARCHITECT_PAGE_PATH, FOR_ARCHITECT_PAGE_TITLE,
+            FOR_FRONTEND_ENGINEER_PAGE_PATH, FOR_FRONTEND_ENGINEER_PAGE_TITLE,
+            FOR_BACKEND_ENGINEER_PAGE_PATH, FOR_BACKEND_ENGINEER_PAGE_TITLE,
+            FOR_MOBILE_ENGINEER_PAGE_PATH, FOR_MOBILE_ENGINEER_PAGE__TITLE,
+            FOR_DESIGNER_PAGE_PATH, FOR_DESIGNER_PAGE_TITLE,
+            FOR_NEW_BIZ_STARTER_PAGE_PATH, FOR_NEW_BIZ_STARTER_PAGE_TITLE,
+            NEW_GRAD_PAGE_PATH, NEW_GRAD_PAGE_TITLE
+        );
+
+        blogPagePathTitleMap.forEach((path, title) -> singleBlogPage.hasCorrectH1tag(path, title));
     }
 }

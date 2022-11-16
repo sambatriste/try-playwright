@@ -35,4 +35,11 @@ public class SingleBlogPage extends PageTemplate {
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
     }
+
+    public void hasCorrectH1tag(String blogPath, String blogTitle) {
+        page.navigate(fintan.url("/" + blogPath + "/"));
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText(blogTitle);
+    }
 }
