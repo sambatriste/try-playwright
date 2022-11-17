@@ -47,4 +47,12 @@ public class CategoryTopPageTest {
 
         categoryPathNameMap.forEach((path, name) -> categoryTopPage.hasCorrectH1Tag(path, name));
     }
+
+    @Test
+    @DisplayName("h2タグが正しい内容であること")
+    void hasCorrectH2tag(Page page) {
+        CategoryTopPage categoryTopPage = new CategoryTopPage(page);
+
+        categoryPathNameMap.forEach((path, name) -> categoryTopPage.hasCorrectH2Tag(path, name));
+    }
 }
