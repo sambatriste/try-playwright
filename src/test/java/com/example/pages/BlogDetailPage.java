@@ -27,7 +27,7 @@ public class BlogDetailPage extends PageTemplate {
         assertThat(page).hasTitle(titleName + " | Fintan");
     }
 
-    public void hasCorrectMetaDescription(String pageId, String expectMetaDescription) {
+    public void checkMetaDescription(String pageId, String expectMetaDescription) {
         page.navigate(fintan.url("/page/" + pageId + "/"));
         Locator metaDescription = page.locator("[name=description][content]");
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある

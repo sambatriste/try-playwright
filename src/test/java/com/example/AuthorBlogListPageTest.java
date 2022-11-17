@@ -19,14 +19,14 @@ public class AuthorBlogListPageTest {
     private final List<String> authorNames = List.of("XRチーム", "協業開発チーム", "新規事業開発チーム");
     @Test
     @DisplayName("著者の記事一覧ページのタイトルが正しい内容であること")
-    void hasCorrectTitle(Page page) {
+    void checkTitle(Page page) {
         AuthorBlogListPage authorBlogListPage = new AuthorBlogListPage(page);
         authorNames.forEach(authorName -> authorBlogListPage.navigate(authorName));
     }
 
     @Test
     @DisplayName("metaタグのdescriptionが正しい内容であること")
-    void hasCorrectMetaDescription(Page page) {
+    void checkMetaDescription(Page page) {
         AuthorBlogListPage authorBlogListPage = new AuthorBlogListPage(page);
 
         authorNames.forEach(authorName -> {
@@ -38,5 +38,12 @@ public class AuthorBlogListPageTest {
             String actualMetaDescription = metaDescription.first().getAttribute("content");
             assertEquals(expectMetaDescription, actualMetaDescription);
         });
+    }
+
+    @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void checkH1Tag(Page page) {
+        AuthorBlogListPage authorBlogListPage = new AuthorBlogListPage(page);
+        authorNames.forEach(authorName -> authorBlogListPage.checkH1Tag(authorName));
     }
 }

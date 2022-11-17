@@ -22,7 +22,7 @@ public class BlogDetailPageTest {
 
     @Test
     @DisplayName("記事詳細ページのタイトルが正しい内容であること")
-    void hasCorrectTitle(Page page) {
+    void checkTitle(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
 
         Map<String, String> idTitleMap = Map.of(
@@ -41,7 +41,7 @@ public class BlogDetailPageTest {
 
     @Test
     @DisplayName("metaタグのdescriptionが正しい内容であること")
-    void hasCorrectMetaDescription(Page page) {
+    void checkMetaDescription(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
 
         Map<String, String> pageIdExcerptMap = Map.of(
@@ -55,6 +55,6 @@ public class BlogDetailPageTest {
             FAQ_PAGE_ID, "Fintanの利用についてのよくあるご質問をご紹介いたします。" + META_DESCRIPTION
         );
 
-        pageIdExcerptMap.forEach((pageId, excerpt) -> blogDetailPage.hasCorrectMetaDescription(pageId, excerpt));
+        pageIdExcerptMap.forEach((pageId, excerpt) -> blogDetailPage.checkMetaDescription(pageId, excerpt));
     }
 }

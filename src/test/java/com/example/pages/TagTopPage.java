@@ -25,4 +25,11 @@ public class TagTopPage extends PageTemplate {
         assertThat(title).hasCount(1);
         assertThat(page).hasTitle("#" + tagName + "の記事一覧 | Fintan");
     }
+
+    public void checkH1Tag(String tagName) {
+        page.navigate(fintan.url("/blog-tag/" + tagName + "/"));
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText("#" + tagName + " のタグが付いた記事一覧");
+    }
 }

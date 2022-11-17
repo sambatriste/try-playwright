@@ -25,4 +25,11 @@ public class AuthorBlogListPage extends PageTemplate {
         assertThat(title).hasCount(1);
         assertThat(page).hasTitle("著者：" + authorName + "の記事一覧 | Fintan");
     }
+
+    public void checkH1Tag(String authorName) {
+        page.navigate(fintan.url("/author/" + authorName + "/"));
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText(authorName);
+    }
 }

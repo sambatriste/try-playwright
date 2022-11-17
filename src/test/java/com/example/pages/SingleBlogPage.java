@@ -27,12 +27,19 @@ public class SingleBlogPage extends PageTemplate {
         assertThat(page).hasTitle(blogTitle + " | Fintan");
     }
 
-    public void hasCorrectMetaDescription(String blogPath, String expectMetaDescription) {
+    public void checkMetaDescription(String blogPath, String expectMetaDescription) {
         page.navigate(fintan.url("/" + blogPath + "/"));
         Locator metaDescription = page.locator("[name=description][content]");
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
+    }
+
+    public void checkH1Tag(String blogPath, String blogTitle) {
+        page.navigate(fintan.url("/" + blogPath + "/"));
+        Locator h1Tag = page.locator("h1");
+        assertThat(h1Tag).hasCount(1);
+        assertThat(h1Tag).hasText(blogTitle);
     }
 }
