@@ -20,14 +20,14 @@ public class SearchResultPageTest {
     private final List<String> keywords = List.of("XR", "java", "spring");
     @Test
     @DisplayName("検索結果ページのタイトルが正しい内容であること")
-    void hasCorrectTitle(Page page) {
+    void checkTitle(Page page) {
         SearchResultPage searchResultPage = new SearchResultPage(page);
         keywords.forEach(keyword -> searchResultPage.navigate(keyword));
     }
 
     @Test
     @DisplayName("検索結果ページ、metaタグのdescriptionが正しい内容であること")
-    void hasCorrectMetaDescription(Page page) {
+    void checkMetaDescription(Page page) {
         SearchResultPage searchResultPage = new SearchResultPage(page);
         keywords.forEach(keyword -> {
             searchResultPage.navigate(keyword);

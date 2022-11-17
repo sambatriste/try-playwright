@@ -19,7 +19,7 @@ public class TagTopPageTest {
     private final List<String> tagNames = List.of("XR", "スクラム開発", "イベント");
     @Test
     @DisplayName("タグトップページのタイトルが正しい内容であること")
-    void hasCorrectTitle(Page page) {
+    void checkTitle(Page page) {
         TagTopPage tagTopPage = new TagTopPage(page);
 
         tagNames.forEach(tagName -> tagTopPage.navigate(tagName));
@@ -27,7 +27,7 @@ public class TagTopPageTest {
 
     @Test
     @DisplayName("metaタグのdescriptionが正しい内容であること")
-    void hasCorrectMetaDescription(Page page) {
+    void checkMetaDescription(Page page) {
         TagTopPage tagTopPage = new TagTopPage(page);
 
         tagNames.forEach(tagName -> {
@@ -43,9 +43,9 @@ public class TagTopPageTest {
 
     @Test
     @DisplayName("h1タグが正しい内容であること")
-    void hasCorrectH1tag(Page page) {
+    void checkH1Tag(Page page) {
         TagTopPage tagTopPage = new TagTopPage(page);
 
-        tagNames.forEach(tagName -> tagTopPage.hasCorrectH1tag(tagName));
+        tagNames.forEach(tagName -> tagTopPage.checkH1Tag(tagName));
     }
 }

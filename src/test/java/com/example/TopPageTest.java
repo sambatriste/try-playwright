@@ -267,7 +267,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("metaタグのdescriptionが正しい内容であること")
-    void hasCorrectMetaDescription(Page page) {
+    void checkMetaDescription(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator metaDescription = page.locator("[name=description][content]");
@@ -279,7 +279,7 @@ public class TopPageTest {
 
     @Test
     @DisplayName("h2タグが正しい内容であること")
-    void hasCorrectH2tag(Page page) {
+    void checkH2Tag(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h2");

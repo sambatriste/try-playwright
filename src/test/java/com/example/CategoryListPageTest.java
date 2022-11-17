@@ -72,7 +72,7 @@ public class CategoryListPageTest {
 
     @Test
     @DisplayName("h1タグが正しい内容であること")
-    void hasCorrectH1tag(Page page) {
+    void checkH1Tag(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
         categoryListPage.navigate();
         Locator h1Tag = page.locator("h1");
@@ -83,7 +83,7 @@ public class CategoryListPageTest {
     @Test
     @DisplayName("テスト環境h2タグが正しい内容であること")
     @EnabledOnEnvironment(production = false, reason = "テスト環境のカテゴリが本番に追いついてない為")
-    void hasCorrectH2tagTestEnv(Page page) {
+    void checkH2tagTestEnv(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
         categoryListPage.navigate();
         Locator h2Tag = page.locator("h2");
@@ -94,7 +94,7 @@ public class CategoryListPageTest {
     @Test
     @DisplayName("本番環境h2タグが正しい内容であること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境のカテゴリが本番に追いついてない為")
-    void hasCorrectH2tagProductionEnv(Page page) {
+    void checkH2tagProductionEnv(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
         categoryListPage.navigate();
         Locator h2Tag = page.locator("h2");

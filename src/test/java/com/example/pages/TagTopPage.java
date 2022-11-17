@@ -26,7 +26,7 @@ public class TagTopPage extends PageTemplate {
         assertThat(page).hasTitle("#" + tagName + "の記事一覧 | Fintan");
     }
 
-    public void hasCorrectH1tag(String tagName) {
+    public void checkH1Tag(String tagName) {
         page.navigate(fintan.url("/blog-tag/" + tagName + "/"));
         Locator h1Tag = page.locator("h1");
         assertThat(h1Tag).hasCount(1);

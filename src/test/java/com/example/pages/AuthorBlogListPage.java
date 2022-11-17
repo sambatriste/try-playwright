@@ -26,7 +26,7 @@ public class AuthorBlogListPage extends PageTemplate {
         assertThat(page).hasTitle("著者：" + authorName + "の記事一覧 | Fintan");
     }
 
-    public void hasCorrectH1tag(String authorName) {
+    public void checkH1Tag(String authorName) {
         page.navigate(fintan.url("/author/" + authorName + "/"));
         Locator h1Tag = page.locator("h1");
         assertThat(h1Tag).hasCount(1);
