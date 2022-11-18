@@ -34,7 +34,7 @@ public class CategoryListPageTest {
     };
 
     @Test
-    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（テスト環境）")
+    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（テスト環境）。また各カテゴリ名のdom要素がdivであること")
     @EnabledOnEnvironment(production = false, reason = "テスト環境のカテゴリが本番に追いついてない為")
     void categoryListIsCorrectTestEnv(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
@@ -45,7 +45,7 @@ public class CategoryListPageTest {
     }
 
     @Test
-    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（本番環境）")
+    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（本番環境）。また各カテゴリ名のdom要素がdivであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境のカテゴリが本番に追いついてない為")
     void categoryListIsCorrectProductionEnv(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
