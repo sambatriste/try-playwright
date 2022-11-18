@@ -29,10 +29,17 @@ public class BlogDetailPage extends PageTemplate {
 
     public void checkMetaDescription(String pageId, String expectMetaDescription) {
         page.navigate(fintan.url("/page/" + pageId + "/"));
-        Locator metaDescription = page.locator("[name=description][content]");
+        Locator metaDescription = getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
+    }
+
+    public void checkAuthorNameDomElement(String pageId, String expectedAuthorName) {
+        page.navigate(fintan.url("/page/" + pageId + "/"));
+        Locator authorDetail = page.locator(".post-author .info div a").first();
+        assertThat(authorDetail).hasCount(1);
+        assertEquals(expectedAuthorName, authorDetail.textContent());
     }
 }

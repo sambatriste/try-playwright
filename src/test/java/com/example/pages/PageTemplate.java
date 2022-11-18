@@ -1,5 +1,6 @@
 package com.example.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 /**
@@ -21,5 +22,13 @@ public abstract class PageTemplate {
         this.page = page;
         this.header = new Header(page);
         this.footer = new Footer(page);
+    }
+
+    /**
+     * メタディスクリプションを取得する。
+     * @return メタディスクリプション
+     */
+    public Locator getMetaDescription() {
+        return page.locator("meta[name=description][content]");
     }
 }

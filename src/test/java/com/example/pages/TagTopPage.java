@@ -32,4 +32,13 @@ public class TagTopPage extends PageTemplate {
         assertThat(h1Tag).hasCount(1);
         assertThat(h1Tag).hasText("#" + tagName + " のタグが付いた記事一覧");
     }
+
+    /**
+     * タグが付与された記事のタイトルを取得する。
+     *
+     * @return 記事のタイトル（記事の数だけ返却される）
+     */
+    public Locator getContentTitles() {
+        return page.locator("div.o-card__title");
+    }
 }

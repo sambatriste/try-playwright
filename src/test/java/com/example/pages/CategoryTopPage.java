@@ -26,7 +26,7 @@ public class CategoryTopPage extends PageTemplate {
 
     public void checkMetaDescription(String categoryPath, String expectMetaDescription) {
         page.navigate(fintan.url("/blog-category/" + categoryPath + "/"));
-        Locator metaDescription = page.locator("[name=description][content]");
+        Locator metaDescription = getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
         String actualMetaDescription = metaDescription.first().getAttribute("content");

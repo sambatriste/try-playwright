@@ -57,4 +57,17 @@ public class BlogDetailPageTest {
 
         pageIdExcerptMap.forEach((pageId, excerpt) -> blogDetailPage.checkMetaDescription(pageId, excerpt));
     }
+
+    @Test
+    @DisplayName("記事の著者エリア、著者名のdom要素はdivであること")
+    void checkAuthorNameDomElement(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        Map<String, String> idAuthorNameMap = Map.of(
+            "501", "XRチーム",
+            "163", "モバイル開発チーム",
+            "1435", "協業開発チーム"
+        );
+
+        idAuthorNameMap.forEach((id, name) -> blogDetailPage.checkAuthorNameDomElement(id, name));
+    }
 }

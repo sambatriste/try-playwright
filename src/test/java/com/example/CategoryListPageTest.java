@@ -34,7 +34,7 @@ public class CategoryListPageTest {
     };
 
     @Test
-    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（テスト環境）")
+    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（テスト環境）。また各カテゴリ名のdom要素がdivであること")
     @EnabledOnEnvironment(production = false, reason = "テスト環境のカテゴリが本番に追いついてない為")
     void categoryListIsCorrectTestEnv(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
@@ -45,7 +45,7 @@ public class CategoryListPageTest {
     }
 
     @Test
-    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（本番環境）")
+    @DisplayName("カテゴリ一覧に正しい内容のカテゴリ一覧が表示されること（本番環境）。また各カテゴリ名のdom要素がdivであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境のカテゴリが本番に追いついてない為")
     void categoryListIsCorrectProductionEnv(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
@@ -78,27 +78,5 @@ public class CategoryListPageTest {
         Locator h1Tag = page.locator("h1");
         assertThat(h1Tag).hasCount(1);
         assertThat(h1Tag).hasText("Category");
-    }
-
-    @Test
-    @DisplayName("テスト環境h2タグが正しい内容であること")
-    @EnabledOnEnvironment(production = false, reason = "テスト環境のカテゴリが本番に追いついてない為")
-    void checkH2tagTestEnv(Page page) {
-        CategoryListPage categoryListPage = new CategoryListPage(page);
-        categoryListPage.navigate();
-        Locator h2Tag = page.locator("h2");
-        assertThat(h2Tag).hasCount(categoryNamesTestEnv.length);
-        assertThat(h2Tag).containsText(categoryNamesTestEnv);
-    }
-
-    @Test
-    @DisplayName("本番環境h2タグが正しい内容であること")
-    @EnabledOnEnvironment(production = true, reason = "テスト環境のカテゴリが本番に追いついてない為")
-    void checkH2tagProductionEnv(Page page) {
-        CategoryListPage categoryListPage = new CategoryListPage(page);
-        categoryListPage.navigate();
-        Locator h2Tag = page.locator("h2");
-        assertThat(h2Tag).hasCount(categoryNamesProductionEnv.length);
-        assertThat(h2Tag).containsText(categoryNamesProductionEnv);
     }
 }

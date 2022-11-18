@@ -29,7 +29,7 @@ public class AllBlogListPageTest {
 
         allBlogListPage.navigate();
         String expectMetaDescription = "記事の総一覧リストページです。" + META_DESCRIPTION;
-        Locator metaDescription = page.locator("[name=description][content]");
+        Locator metaDescription = allBlogListPage.getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
         String actualMetaDescription = metaDescription.first().getAttribute("content");

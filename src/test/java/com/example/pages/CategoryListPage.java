@@ -27,7 +27,7 @@ public class CategoryListPage extends PageTemplate {
     }
 
     public Locator getCategoryNameLinks() {
-        return page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a > h2");
+        return page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a > div");
     }
 
     public Locator getBlogListLink() {
