@@ -29,7 +29,7 @@ public class BlogDetailPage extends PageTemplate {
 
     public void checkMetaDescription(String pageId, String expectMetaDescription) {
         page.navigate(fintan.url("/page/" + pageId + "/"));
-        Locator metaDescription = page.locator("[name=description][content]");
+        Locator metaDescription = getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
         String actualMetaDescription = metaDescription.first().getAttribute("content");

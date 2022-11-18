@@ -271,7 +271,7 @@ public class TopPageTest {
     void checkMetaDescription(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
-        Locator metaDescription = page.locator("[name=description][content]");
+        Locator metaDescription = topPage.getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
         String actualMetaDescription = metaDescription.first().getAttribute("content");

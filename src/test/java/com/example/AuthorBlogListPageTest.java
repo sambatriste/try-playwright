@@ -32,7 +32,7 @@ public class AuthorBlogListPageTest {
         authorNames.forEach(authorName -> {
             authorBlogListPage.navigate(authorName);
             String expectMetaDescription = "著者：" + authorName + "の記事一覧ページです。" + META_DESCRIPTION;
-            Locator metaDescription = page.locator("[name=description][content]");
+            Locator metaDescription = authorBlogListPage.getMetaDescription();
             // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
             assertThat(metaDescription).hasCount(1);
             String actualMetaDescription = metaDescription.first().getAttribute("content");

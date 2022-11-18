@@ -31,7 +31,7 @@ public class SearchResultPageTest {
         SearchResultPage searchResultPage = new SearchResultPage(page);
         keywords.forEach(keyword -> {
             searchResultPage.navigate(keyword);
-            Locator metaDescription = page.locator("[name=description][content]");
+            Locator metaDescription = searchResultPage.getMetaDescription();
             // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
             assertThat(metaDescription).hasCount(1);
             String actualMetaDescription = metaDescription.first().getAttribute("content");

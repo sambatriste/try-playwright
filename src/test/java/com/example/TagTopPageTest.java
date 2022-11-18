@@ -18,7 +18,7 @@ public class TagTopPageTest {
     private static final String META_DESCRIPTION = "Fintanは、TISインテックグループが研究開発や、システム開発、新規事業開発のプロジェクトで培ったノウハウを集約したサイトです。";
     private final List<String> tagNames = List.of("XR", "スクラム開発", "イベント");
 
-    private static final int MAX_BLOG_COUNT_PER_PAGE_TAP_TOP_PAGE = 16;
+    private static final int MAX_BLOG_COUNT_PER_PAGE_TAG_TOP_PAGE = 16;
     @Test
     @DisplayName("タグトップページのタイトルが正しい内容であること")
     void checkTitle(Page page) {
@@ -34,7 +34,7 @@ public class TagTopPageTest {
 
         tagNames.forEach(tagName -> {
             tagTopPage.navigate(tagName);
-            Locator metaDescription = page.locator("[name=description][content]");
+            Locator metaDescription = tagTopPage.getMetaDescription();
             // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
             assertThat(metaDescription).hasCount(1);
             String expectMetaDescription = "#" + tagName + "の記事一覧ページです。" + META_DESCRIPTION;
@@ -56,7 +56,7 @@ public class TagTopPageTest {
     void checkBlogTileDomElement(Page page) {
         TagTopPage tagTopPage = new TagTopPage(page);
         tagTopPage.navigate("React");
-        Locator titleDivElement = page.locator("div.o-card__title");
-        assertThat(titleDivElement).hasCount(MAX_BLOG_COUNT_PER_PAGE_TAP_TOP_PAGE);
+        Locator titleDivElements = tagTopPage.getContentTitles();
+        assertThat(titleDivElements).hasCount(MAX_BLOG_COUNT_PER_PAGE_TAG_TOP_PAGE);
     }
 }
