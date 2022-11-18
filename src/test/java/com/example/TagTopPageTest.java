@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TagTopPageTest {
     private static final String META_DESCRIPTION = "Fintanは、TISインテックグループが研究開発や、システム開発、新規事業開発のプロジェクトで培ったノウハウを集約したサイトです。";
     private final List<String> tagNames = List.of("XR", "スクラム開発", "イベント");
+
+    private static final int MAX_BLOG_COUNT_PER_PAGE_TAP_TOP_PAGE = 16;
     @Test
     @DisplayName("タグトップページのタイトルが正しい内容であること")
     void checkTitle(Page page) {
@@ -47,5 +49,14 @@ public class TagTopPageTest {
         TagTopPage tagTopPage = new TagTopPage(page);
 
         tagNames.forEach(tagName -> tagTopPage.checkH1Tag(tagName));
+    }
+
+    @Test
+    @DisplayName("記事一覧の各記事タイトルのdom要素はdivであること")
+    void checkBlogTileDomElement(Page page) {
+        TagTopPage tagTopPage = new TagTopPage(page);
+        tagTopPage.navigate("React");
+        Locator titleDivElement = page.locator("div.o-card__title");
+        assertThat(titleDivElement).hasCount(MAX_BLOG_COUNT_PER_PAGE_TAP_TOP_PAGE);
     }
 }

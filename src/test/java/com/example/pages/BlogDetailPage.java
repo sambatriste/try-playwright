@@ -35,4 +35,11 @@ public class BlogDetailPage extends PageTemplate {
         String actualMetaDescription = metaDescription.first().getAttribute("content");
         assertEquals(expectMetaDescription, actualMetaDescription);
     }
+
+    public void checkAuthorNameDomElement(String pageId, String expectedAuthorName) {
+        page.navigate(fintan.url("/page/" + pageId + "/"));
+        Locator authorDetail = page.locator(".post-author .info div a").first();
+        assertThat(authorDetail).hasCount(1);
+        assertEquals(expectedAuthorName, authorDetail.textContent());
+    }
 }

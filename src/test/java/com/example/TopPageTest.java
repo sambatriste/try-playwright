@@ -16,6 +16,7 @@ public class TopPageTest {
 
     private static final String FINTAN_PROD_URL = "https://fintan.jp";
     private static final String META_DESCRIPTION = "Fintanは、TISインテックグループが研究開発や、システム開発、新規事業開発のプロジェクトで培ったノウハウを集約したサイトです。研究成果や、PJ推進のプラクティス、要件定義/設計/プログラミング/テストといった作業のプラクティス、成果物のテンプレート/サンプル、各種開発ツールを提供します。Fintanは、どなたでも無償でご利用いただけます。";
+    private static final int LATEST_BLOG_COUNT_TOP_PAGE = 32;
 
     @Test
     @DisplayName("トップページからカテゴリ一覧ページに遷移できること")
@@ -288,5 +289,14 @@ public class TopPageTest {
         String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ", "", ""};
         assertThat(h2Tags).hasCount(h2TagTexts.length);
         assertThat(h2Tags).containsText(h2TagTexts);
+    }
+
+    @Test
+    @DisplayName("（最新記事エリア）記事一覧の各記事タイトルのdom要素はdivであること")
+    void checkBlogTileDomElement(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator titleDivElement = page.locator(".c-top__latest .o-card-list div.o-card__title");
+        assertThat(titleDivElement).hasCount(LATEST_BLOG_COUNT_TOP_PAGE);
     }
 }
