@@ -70,4 +70,17 @@ public class BlogDetailPageTest {
 
         idAuthorNameMap.forEach((id, name) -> blogDetailPage.checkAuthorNameDomElement(id, name));
     }
+
+    @Test
+    @DisplayName("目次エリア、olタグでかつ各目次のdom要素はliタグであること")
+    void checkTableOfContentsDomElement(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        Map<String, Integer> idTableOfContentCountMap = Map.of(
+            "501", 3,
+            "191", 18,
+            "1435", 3
+        );
+
+        idTableOfContentCountMap.forEach((id, count) -> blogDetailPage.checkTableOfContentsDomElement(id, count));
+    }
 }
