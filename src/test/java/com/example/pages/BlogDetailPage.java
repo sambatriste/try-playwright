@@ -42,4 +42,10 @@ public class BlogDetailPage extends PageTemplate {
         assertThat(authorDetail).hasCount(1);
         assertEquals(expectedAuthorName, authorDetail.textContent());
     }
+
+    public void checkTableOfContentsDomElement(String pageId, int tableOfContentsCount) {
+        page.navigate(fintan.url("/page/" + pageId + "/"));
+        Locator tableOfContents = page.locator("ol.post-table li");
+        assertThat(tableOfContents).hasCount(tableOfContentsCount);
+    }
 }
