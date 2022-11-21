@@ -72,7 +72,7 @@ public class BlogDetailPageTest {
     }
 
     @Test
-    @DisplayName("目次エリア、olタグで各目次のdom要素はliタグであること")
+    @DisplayName("目次エリア、olタグでかつ各目次のdom要素はliタグであること")
     void checkTableOfContentsDomElement(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         Map<String, Integer> idTableOfContentCountMap = Map.of(
