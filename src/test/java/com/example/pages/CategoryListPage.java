@@ -7,7 +7,6 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 /**
  * カテゴリ一覧ページ。
- *
  */
 public class CategoryListPage extends PageTemplate {
 
@@ -27,7 +26,7 @@ public class CategoryListPage extends PageTemplate {
     }
 
     public Locator getCategoryNameLinks() {
-        return page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a > div");
+        return page.locator("ul.c-blog-category__list > li > .c-blog-category__block > a:first-child ");
     }
 
     public Locator getBlogListLink() {
