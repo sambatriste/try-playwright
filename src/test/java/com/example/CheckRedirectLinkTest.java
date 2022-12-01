@@ -2,6 +2,7 @@ package com.example;
 
 import com.example.config.EnabledOnEnvironment;
 import com.example.pages.BlogDetailPage;
+import com.example.pages.Fintan;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +13,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 @ExtendWith(PlaywrightExtension.class)
 public class CheckRedirectLinkTest {
-    private static final String FINTAN_PROD_URL = "https://fintan.jp";
+    private Fintan fintan = Fintan.getInstance();
 
     // checkInternalLink系のテストは記事内の内部リンクが修正されてから正しい遷移先URLであるかどうかをチェックするため
     // 例：「/?p=6634」は旧サイトURL、実際に「/page/233/」にリダイレクトしているため、「/page/233/に修正する
@@ -29,115 +30,115 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1599");
         page.locator("text=本記事では NablarchアプリをAzureで動かした事例の紹介 で構築する一部の手順をTerraformで自動化しています。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/");
+        assertThat(page).hasURL(fintan.url("/page/233/"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=NablarchアプリをAzureで動かした事例の紹介").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/");
+        assertThat(page).hasURL(fintan.url("/page/233/"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Container Registryにレジストリを作成").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#upload-docker-image-to-azure-container-registry");
+        assertThat(page).hasURL(fintan.url("/page/233/#upload-docker-image-to-azure-container-registry"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Blob Storage").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-blob-storage");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-blob-storage"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Database for PostgreSQL").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-database-for-postgresql");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-database-for-postgresql"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Cache for Redis").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-cache-for-redis");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-cache-for-redis"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=アプリケーションのDockerイメージを作成する").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-a-docker-image-of-the-application");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-a-docker-image-of-the-application"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=DockerイメージをAzure Container Registryにアップロードする").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#upload-docker-image-to-azure-container-registry");
+        assertThat(page).hasURL(fintan.url("/page/233/#upload-docker-image-to-azure-container-registry"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=App Serviceでコンテナーインスタンスを作成する").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-a-container-instance-with-app-service");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-a-container-instance-with-app-service"));
 
         blogDetailPage.navigate("1599");
         page.locator("a:has-text(\"動作確認\")").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#cperation-check");
+        assertThat(page).hasURL(fintan.url("/page/233/#cperation-check"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Container Registryにレジストリを作成").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#upload-docker-image-to-azure-container-registry");
+        assertThat(page).hasURL(fintan.url("/page/233/#upload-docker-image-to-azure-container-registry"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Blob Storage").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-blob-storage");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-blob-storage"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Database for PostgreSQL").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-database-for-postgresql");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-database-for-postgresql"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Cache for Redis").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-cache-for-redis");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-cache-for-redis"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=Azure Database for PostgreSQL").nth(2).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#azure-database-for-postgresql");
+        assertThat(page).hasURL(fintan.url("/page/233/#azure-database-for-postgresql"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=アプリケーションのDockerイメージを作成する 「DockerイメージをAzure Container Registryにアップロードする」までの手順を手動で >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-a-docker-image-of-the-application");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-a-docker-image-of-the-application"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=backendのURLを設定する").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#set-the-backend-url");
+        assertThat(page).hasURL(fintan.url("/page/233/#set-the-backend-url"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=DockerイメージをAzure Container Registryにアップロードする 「App Serviceでコンテナーインスタンスを作成する」までの手順 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#upload-docker-image-to-azure-container-registry");
+        assertThat(page).hasURL(fintan.url("/page/233/#upload-docker-image-to-azure-container-registry"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=App Serviceでコンテナーインスタンスを作成する").nth(2).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-a-container-instance-with-app-service");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-a-container-instance-with-app-service"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=「各Webアプリを作成する 」 までの手順を手動で行います。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-each-web-app");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-each-web-app"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=「環境変数を設定する 」 の手順は、ターミナルからAzure CLIで一括登録できるようにしました。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#set-environment-variables");
+        assertThat(page).hasURL(fintan.url("/page/233/#set-environment-variables"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=環境変数を設定する").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#set-environment-variables");
+        assertThat(page).hasURL(fintan.url("/page/233/#set-environment-variables"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=各Webアプリを作成する").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-each-web-app");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-each-web-app"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=環境変数を設定する").nth(2).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#set-environment-variables");
+        assertThat(page).hasURL(fintan.url("/page/233/#set-environment-variables"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=各Webアプリを作成する").nth(2).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-each-web-app");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-each-web-app"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=環境変数を設定する").nth(3).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#set-environment-variables");
+        assertThat(page).hasURL(fintan.url("/page/233/#set-environment-variables"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=各Webアプリを作成する").nth(3).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#create-each-web-app");
+        assertThat(page).hasURL(fintan.url("/page/233/#create-each-web-app"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=動作確認 の手順を行います。 このようにAzureでもTerraformでウェブアプリケーション開発に必要な環境構築の一部の作業を省力化することが出来ます。 執 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/233/#cperation-check");
+        assertThat(page).hasURL(fintan.url("/page/233/#cperation-check"));
 
     } 
 
@@ -148,15 +149,15 @@ public class CheckRedirectLinkTest {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         blogDetailPage.navigate("1599");
         page.locator("text=DevOps環境構築キット（Epona）").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1543/");
+        assertThat(page).hasURL(fintan.url("/page/1543/"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=DevOps環境構築キット（Epona） の特長 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1543/");
+        assertThat(page).hasURL(fintan.url("/page/1543/"));
 
         blogDetailPage.navigate("1599");
         page.locator("text=本格的なDevOps環境の構築をご検討の際には、 DevOps環境構築キット（Epona） も選択肢に加えてみてください。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1543/");
+        assertThat(page).hasURL(fintan.url("/page/1543/"));
 
     }
 
@@ -168,11 +169,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("424");
         page.locator("text=私の所属する西日本テクノロジー＆イノベーション室では、2020年9月末に「SPA + REST API構成のサービス開発リファレンス（以下サービス開発リファレン >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
 
         blogDetailPage.navigate("424");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     } 
 
     @Test
@@ -183,11 +184,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda JMeterの使い方").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/248/");
+        assertThat(page).hasURL(fintan.url("/page/248/"));
 
         blogDetailPage.navigate("255");
         page.locator("text=前回").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/248/");
+        assertThat(page).hasURL(fintan.url("/page/248/"));
     } 
 
     @Test
@@ -198,7 +199,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda Enterprise Performance検証 ノードスペックを変化することによる性能変化").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/255/");
+        assertThat(page).hasURL(fintan.url("/page/255/"));
     } 
 
     @Test
@@ -209,7 +210,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda JMeterの使い方").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/248/");
+        assertThat(page).hasURL(fintan.url("/page/248/"));
     }
 
     @Test
@@ -220,7 +221,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda Enterprise Collaborative Recovery").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/246/");
+        assertThat(page).hasURL(fintan.url("/page/246/"));
     }
 
     @Test
@@ -231,7 +232,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda Enterprise Archive Service").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/231/");
+        assertThat(page).hasURL(fintan.url("/page/231/"));
     }
 
     @Test
@@ -242,7 +243,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda Firewallの設定方法").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/253/");
+        assertThat(page).hasURL(fintan.url("/page/253/"));
     }
 
     @Test
@@ -253,7 +254,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda re-issuance Tokens SDK and Accountsを利用した一括「re-issuance」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1874/");
+        assertThat(page).hasURL(fintan.url("/page/1874/"));
     }
 
     @Test
@@ -264,7 +265,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda Time-windows").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1861/");
+        assertThat(page).hasURL(fintan.url("/page/1861/"));
     }
 
     @Test
@@ -275,7 +276,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("250");
         page.locator("text=Corda Oracle").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1864/");
+        assertThat(page).hasURL(fintan.url("/page/1864/"));
     }
 
     @Test
@@ -286,7 +287,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda Enterprise Collaborative Recovery").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/246/");
+        assertThat(page).hasURL(fintan.url("/page/246/"));
     }
 
     @Test
@@ -297,7 +298,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda re-issuance Tokens SDK and Accountsを利用した一括「re-issuance」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1874/");
+        assertThat(page).hasURL(fintan.url("/page/1874/"));
     }
 
     @Test
@@ -308,7 +309,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda Enterprise Archive Service").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/231/");
+        assertThat(page).hasURL(fintan.url("/page/231/"));
     }
 
     @Test
@@ -319,7 +320,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda Time-windows").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1861/");
+        assertThat(page).hasURL(fintan.url("/page/1861/"));
     }
 
     @Test
@@ -330,7 +331,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda Oracle").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1864/");
+        assertThat(page).hasURL(fintan.url("/page/1864/"));
     }
 
     @Test
@@ -341,7 +342,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda Firewallの設定方法").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/253/");
+        assertThat(page).hasURL(fintan.url("/page/253/"));
     }
 
     @Test
@@ -352,7 +353,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("259");
         page.locator("a:has-text(\"Nablarchアプリケーションフレームワーク\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/314/");
+        assertThat(page).hasURL(fintan.url("/page/314/"));
     } 
 
     @Test
@@ -363,7 +364,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("255");
         page.locator("text=Corda Tokens SDK and Accounts").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/250/");
+        assertThat(page).hasURL(fintan.url("/page/250/"));
     }
 
     @Test
@@ -374,7 +375,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("299");
         page.locator("text=ライセンスページ").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/295/");
+        assertThat(page).hasURL(fintan.url("/page/295/"));
     } 
 
     @Test
@@ -385,7 +386,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=サービス開発リファレンスを使ってWebアプリケーションを作成してみよう＜導入編＞").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/424/");
+        assertThat(page).hasURL(fintan.url("/page/424/"));
     } 
 
     @Test
@@ -396,7 +397,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=サービス開発リファレンスを使ってREST APIを1つ作成してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/426/");
+        assertThat(page).hasURL(fintan.url("/page/426/"));
     }
 
     @Test
@@ -407,7 +408,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("424");
         page.locator("text=次回").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/430/");
+        assertThat(page).hasURL(fintan.url("/page/430/"));
     }
 
     @Test
@@ -418,7 +419,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=サービス開発リファレンスを使ってバリデーションしてみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/421/");
+        assertThat(page).hasURL(fintan.url("/page/421/"));
     }
 
     @Test
@@ -429,7 +430,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("189");
         page.locator("text=ステージ・ゲートプロセスに基づく新規事業開発").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/175/");
+        assertThat(page).hasURL(fintan.url("/page/175/"));
     } 
 
     @Test
@@ -439,9 +440,9 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("189");
         page.locator("text=1 2 3 4 >> a").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/189/2/");
+        assertThat(page).hasURL(fintan.url("/page/189/2/"));
         page.locator("text=^1").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/257/");
+        assertThat(page).hasURL(fintan.url("/page/257/"));
     }
 
     @Test
@@ -452,11 +453,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("373");
         page.locator("text=このドキュメントは、SPA＋REST APIのシステム構成例（AWS）のアプリケーションの認証部分にフォーカスして記載したものです。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/374/");
+        assertThat(page).hasURL(fintan.url("/page/374/"));
 
         blogDetailPage.navigate("373");
         page.locator("text=SPA＋REST APIのシステム構成例（AWS） – 背景").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/374/#user-content-%E8%83%8C%E6%99%AF");
+        assertThat(page).hasURL(fintan.url("/page/374/#user-content-%E8%83%8C%E6%99%AF"));
     } 
 
     @Test
@@ -467,7 +468,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=サービス開発リファレンスを使ってファイルダウンロードを実装してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/418/");
+        assertThat(page).hasURL(fintan.url("/page/418/"));
     }
 
     @Test
@@ -478,7 +479,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1631");
         page.locator("text=＜ エンジニアに「効く」デザイントレーニングについてはこちらから").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1629/");
+        assertThat(page).hasURL(fintan.url("/page/1629/"));
     } 
 
     @Test
@@ -489,11 +490,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1614");
         page.locator("text=我々が実践した内容は、 『複数ロケーションに跨るチームでのリモート開発実践ガイド』 にまとめています。こちらも併せてご参照頂けますと幸いです。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/538/");
+        assertThat(page).hasURL(fintan.url("/page/538/"));
 
         blogDetailPage.navigate("1614");
         page.locator("text=前述の『複数ロケーションに跨るチームでのリモート開発実践ガイド』にも記載していますが、 リモート開発に必要とされるマインドセットがあると考えており、それを日々実 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/538/");
+        assertThat(page).hasURL(fintan.url("/page/538/"));
     } 
 
     @Test
@@ -503,7 +504,7 @@ public class CheckRedirectLinkTest {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         blogDetailPage.navigate("1614");
         page.locator("text=『新人目線で語る職場の雰囲気レポートIN大阪』").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/379/");
+        assertThat(page).hasURL(fintan.url("/page/379/"));
     }
 
     @Test
@@ -514,7 +515,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("387");
         page.locator("text=DevOps環境構築キットEpona").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1543/");
+        assertThat(page).hasURL(fintan.url("/page/1543/"));
     } 
 
     @Test
@@ -525,19 +526,19 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("506");
         page.locator("text=まとめると、Active Learingはアノテーションの負担を軽減するため、モデルの精度を保ちながら、データ量を削減する技術です。Active Learnin >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/518/");
+        assertThat(page).hasURL(fintan.url("/page/518/"));
 
         blogDetailPage.navigate("506");
         page.locator("text=系列ラベリングにおけるActive Learningでも挙げたように、自然言語処理用のActive Learningツールはいくつか存在します。しかし、そのほと >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/518/");
+        assertThat(page).hasURL(fintan.url("/page/518/"));
 
         blogDetailPage.navigate("506");
         page.locator("text=コードとActive Learningのサイクルを照らし合わせると、わかりやすくなります。ここはActive Learningのサイクルを簡単に紹介します。詳し >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/518/");
+        assertThat(page).hasURL(fintan.url("/page/518/"));
 
         blogDetailPage.navigate("506");
         page.locator("text=系列ラベリングにおけるActive Learning").nth(3).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/518/");
+        assertThat(page).hasURL(fintan.url("/page/518/"));
     } 
 
     @Test
@@ -548,7 +549,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスを使ってCSRF対策をしてみよう").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/428/");
+        assertThat(page).hasURL(fintan.url("/page/428/"));
     } 
 
     @Test
@@ -559,7 +560,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -570,7 +571,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスを使ってWebアプリケーションを作成してみよう＜導入編＞").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/424/");
+        assertThat(page).hasURL(fintan.url("/page/424/"));
     }
 
     @Test
@@ -581,7 +582,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスを使って1画面作成してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/430/");
+        assertThat(page).hasURL(fintan.url("/page/430/"));
     }
 
     @Test
@@ -592,7 +593,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスを使ってREST APIを1つ作成してみよう").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/426/");
+        assertThat(page).hasURL(fintan.url("/page/426/"));
     }
 
     @Test
@@ -603,7 +604,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスを使ってバリデーションしてみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/421/");
+        assertThat(page).hasURL(fintan.url("/page/421/"));
     }
 
     @Test
@@ -614,7 +615,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスを使ってファイルダウンロードを実装してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/418/");
+        assertThat(page).hasURL(fintan.url("/page/418/"));
     }
     @Test
     @DisplayName("「/page/446/」の記事の内部リンクが「/?p=6433」ではなく「/page/418/」のようなものであること")
@@ -624,7 +625,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=サービス開発リファレンスの方式設計ガイドを使ってみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/432/");
+        assertThat(page).hasURL(fintan.url("/page/432/"));
     }
 
     @Test
@@ -635,7 +636,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("446");
         page.locator("text=「サービス開発リファレンスを使ってREST APIを1つ作成してみよう」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/426/#frontend");
+        assertThat(page).hasURL(fintan.url("/page/426/#frontend"));
     }
 
 
@@ -647,7 +648,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("214");
         page.locator("text=Lerna は高い可用性とスループットが求められるシステムを、クラウドを始めとするオープンな環境で構築するためのソフトウェアスタックです。そのコンテンツの1つと >> a").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/503/");
+        assertThat(page).hasURL(fintan.url("/page/503/"));
     } 
 
     @Test
@@ -658,7 +659,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("467");
         page.locator("text=サービス開発を進めていた西日本テクノロジー＆イノベーション室の浦上によるセッションです。 本セッションでは開発体制や進め方などをお話しました。 技術スタックにつ >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1639/");
+        assertThat(page).hasURL(fintan.url("/page/1639/"));
     } 
 
     @Test
@@ -677,7 +678,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=次回").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/432/");
+        assertThat(page).hasURL(fintan.url("/page/432/"));
     }
 
     @Test
@@ -688,7 +689,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -699,7 +700,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("428");
         page.locator("text=サービス開発リファレンスを使って1画面作成してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/430/");
+        assertThat(page).hasURL(fintan.url("/page/430/"));
     }
 
     @Test
@@ -710,11 +711,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("503");
         page.locator("text=バッチ並列化ベンチマークレポート").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/214/");
+        assertThat(page).hasURL(fintan.url("/page/214/"));
 
         blogDetailPage.navigate("503");
         page.locator("text=Lernaでバッチ処理を並列化したらリニアに速くなるか検証してみた（Fintan）").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/214/");
+        assertThat(page).hasURL(fintan.url("/page/214/"));
     } 
 
     @Test
@@ -725,11 +726,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("503");
         page.locator("text=※ベンチマークテストにおける前提条件、スコアの詳細は「Lernaの可用性と処理能力」参照 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/223/");
+        assertThat(page).hasURL(fintan.url("/page/223/"));
 
         blogDetailPage.navigate("503");
         page.locator("text=ベンチマークレポート Lernaの可用性と処理能力を計測したベンチマークレポート >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/223/");
+        assertThat(page).hasURL(fintan.url("/page/223/"));
     }
 
     @Test
@@ -740,7 +741,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("334");
         page.locator("text=Nablarchシステム開発ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/252/");
+        assertThat(page).hasURL(fintan.url("/page/252/"));
     } 
 
     @Test
@@ -751,7 +752,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("334");
         page.locator("text=Nablarchは、企業情報システム(エンタープライズシステム)開発のために包括的に設計されたJavaアプリケーション開発⁄実行基盤です。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/314/");
+        assertThat(page).hasURL(fintan.url("/page/314/"));
     }
 
     @Test
@@ -762,7 +763,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=アプリケーション方式設計書サンプル").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/317/");
+        assertThat(page).hasURL(fintan.url("/page/317/"));
     } 
 
     @Test
@@ -773,7 +774,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1611");
         page.locator("text=スキルマップ運用ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/257/");
+        assertThat(page).hasURL(fintan.url("/page/257/"));
     } 
 
     @Test
@@ -784,7 +785,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1717");
         page.locator("text=Fintan Content License Terms And Conditions").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1890/");
+        assertThat(page).hasURL(fintan.url("/en/page/1890/"));
     } 
 
     @Test
@@ -795,7 +796,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("a:has-text(\"トレーニングコンテンツ\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/259/");
+        assertThat(page).hasURL(fintan.url("/page/259/"));
     }
 
     @Test
@@ -806,7 +807,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=Nablarchシステム開発ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/252/");
+        assertThat(page).hasURL(fintan.url("/page/252/"));
     }
 
     @Test
@@ -817,7 +818,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=サービス開発のエンジニアリングガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/");
+        assertThat(page).hasURL(fintan.url("/page/1455/"));
     }
 
     @Test
@@ -828,7 +829,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -839,7 +840,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=要件定義フレームワーク").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1672/");
+        assertThat(page).hasURL(fintan.url("/page/1672/"));
     }
 
     @Test
@@ -850,7 +851,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=テスト種別＆観点カタログ").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1456/");
+        assertThat(page).hasURL(fintan.url("/page/1456/"));
     }
 
     @Test
@@ -861,7 +862,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=全体テスト計画ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1458/");
+        assertThat(page).hasURL(fintan.url("/page/1458/"));
     }
 
     @Test
@@ -872,7 +873,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=方式設計書サンプル").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/317/");
+        assertThat(page).hasURL(fintan.url("/page/317/"));
     }
 
     @Test
@@ -883,7 +884,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("text=Collaborage（チーム開発環境構築テンプレート）").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1540/");
+        assertThat(page).hasURL(fintan.url("/page/1540/"));
     }
 
     @Test
@@ -894,10 +895,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("a:has-text(\"3\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1868/3/");
+        assertThat(page).hasURL(fintan.url("/page/1868/3/"));
 
         page.locator("text=Nablarchシステム開発ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/252/");
+        assertThat(page).hasURL(fintan.url("/page/252/"));
     }
 
     @Test
@@ -908,10 +909,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1868");
         page.locator("a:has-text(\"3\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1868/3/");
+        assertThat(page).hasURL(fintan.url("/page/1868/3/"));
 
         page.locator("text=ウォーターフォール開発における各工程毎に、使えるNablarchのコンテンツと、その活用方法が紹介されています。 ガイド内に各ドキュメントのリンクがありますが、 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/259/");
+        assertThat(page).hasURL(fintan.url("/page/259/"));
     }
 
     @Test
@@ -922,7 +923,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("387");
         page.locator("text=さて本題です。 会津大生向けにハンズオンを行いましたので、その内容をお伝えします。 このハンズオンはシリーズで行いました。開催経緯については会津大生向けにSPA >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/392/");
+        assertThat(page).hasURL(fintan.url("/page/392/"));
     }
 
     @Test
@@ -933,11 +934,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("2685");
         page.locator("a:has-text(\"Split Brain Resolver\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/191/#split-brain-resolver");
+        assertThat(page).hasURL(fintan.url("/page/191/#split-brain-resolver"));
 
         blogDetailPage.navigate("2685");
         page.locator("text=アプリケーションの起動・停止シーケンスの調整").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/191/#application-start-stop-sequence");
+        assertThat(page).hasURL(fintan.url("/page/191/#application-start-stop-sequence"));
     } 
 
     @Test
@@ -948,11 +949,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1532");
         page.locator("text=※この開発時に扱った技術は「JWEとJWSによる暗号化の実装」として事例を公開しています。 JOSEのJWE, JWSを使った暗号化の具体的な実装方法にも触れて >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1572/");
+        assertThat(page).hasURL(fintan.url("/page/1572/"));
 
         blogDetailPage.navigate("1532");
         page.locator("text=このように基本的な用語も調べながら、改めて鍵の生成と取り込み方法を調査した結果、「JWEとJWSによる暗号化の実装」で紹介した処理を実現することが出来ました。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1572/");
+        assertThat(page).hasURL(fintan.url("/page/1572/"));
     } 
 
     @Test
@@ -963,7 +964,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("376");
         page.locator("text=デザイナー＆エンジニア協業で得たTIPS").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1524/");
+        assertThat(page).hasURL(fintan.url("/page/1524/"));
     } 
 
     @Test
@@ -974,7 +975,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("341");
         page.locator("text=iPhoneでバーチャルキーボード表示時に固定要素が画面外に消える問題を解決する").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/355/");
+        assertThat(page).hasURL(fintan.url("/page/355/"));
     } 
 
     @Test
@@ -985,7 +986,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("340");
         page.locator("text=Amazon Cognito User Pool を用いたWebサービスにおけるユーザー管理・運用の事例にあるように、ユーザー認証や管理には外部の認証基盤を利用 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/338/");
+        assertThat(page).hasURL(fintan.url("/page/338/"));
     } 
 
     @Test
@@ -996,7 +997,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("424");
         page.locator("text=サービス開発リファレンスを利用してWebサービスのプロトタイプを開発しました").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/412/");
+        assertThat(page).hasURL(fintan.url("/page/412/"));
     }
 
     @Test
@@ -1007,11 +1008,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("280");
         page.locator("text=Fintan – スクラム概論").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/265/");
+        assertThat(page).hasURL(fintan.url("/page/265/"));
 
         blogDetailPage.navigate("280");
         page.locator("text=振り返りアクション Fintan – スクラム概論を用いて、私たちからPOの上長を含む顧客に対してスクラムの考え方を説明した。 双方の置かれた状況に当て嵌めなが >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/265/");
+        assertThat(page).hasURL(fintan.url("/page/265/"));
     } 
 
     @Test
@@ -1022,11 +1023,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1639");
         page.locator("text=React+APIでのOAuth2.0認証").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/359/");
+        assertThat(page).hasURL(fintan.url("/page/359/"));
 
         blogDetailPage.navigate("1639");
         page.locator("text=詳しい内容に関してはReact+APIでのOAuth2.0認証を参照して下さい。 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/359/");
+        assertThat(page).hasURL(fintan.url("/page/359/"));
     } 
 
     @Test
@@ -1037,7 +1038,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1639");
         page.locator("text=Swaggerを利用したUI開発").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/465/");
+        assertThat(page).hasURL(fintan.url("/page/465/"));
     }
 
     @Test
@@ -1048,7 +1049,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("456");
         page.locator("text=UI開発にSwaggerで作ったmockサーバーを使う").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/465/");
+        assertThat(page).hasURL(fintan.url("/page/465/"));
     } 
 
     @Test
@@ -1059,7 +1060,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「新人目線で語る職場の雰囲気レポートIN大阪」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/379/");
+        assertThat(page).hasURL(fintan.url("/page/379/"));
     } 
 
     @Test
@@ -1070,7 +1071,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("328");
         page.locator("text=ハンズオンイベント").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/330/");
+        assertThat(page).hasURL(fintan.url("/page/330/"));
     } 
 
     @Test
@@ -1081,7 +1082,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=要件定義フレームワーク").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1672/");
+        assertThat(page).hasURL(fintan.url("/page/1672/"));
     }
 
     @Test
@@ -1092,7 +1093,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Collaborage（チーム開発環境構築テンプレート）").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1540/");
+        assertThat(page).hasURL(fintan.url("/page/1540/"));
     } 
 
     @Test
@@ -1103,7 +1104,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1427");
         page.locator("text=Fintan – サービス開発のエンジニアリングガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/");
+        assertThat(page).hasURL(fintan.url("/page/1455/"));
     } 
 
     @Test
@@ -1114,7 +1115,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「2ヶ月間フル在宅勤務でチーム開発しました」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1545/");
+        assertThat(page).hasURL(fintan.url("/page/1545/"));
     }
 
     @Test
@@ -1125,7 +1126,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("177");
         page.locator("text=アップサイクル事業").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/189/");
+        assertThat(page).hasURL(fintan.url("/page/189/"));
     } 
 
     @Test
@@ -1136,7 +1137,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("384");
         page.locator("text=Dockerコンテナ上のJenkinsでコンテナをたててテストを実行する").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1565/");
+        assertThat(page).hasURL(fintan.url("/page/1565/"));
     } 
 
     @Test
@@ -1147,7 +1148,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「短納期でフロントエンド開発をして得た知見」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/376/");
+        assertThat(page).hasURL(fintan.url("/page/376/"));
     }
 
     @Test
@@ -1158,7 +1159,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1536");
         page.locator("text=AWS Management Consoleのログインをメール通知する").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/344/");
+        assertThat(page).hasURL(fintan.url("/page/344/"));
     } 
 
     @Test
@@ -1169,7 +1170,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("456");
         page.locator("text=ReactでAPI通信をしている間Loading画面を表示する").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/362/");
+        assertThat(page).hasURL(fintan.url("/page/362/"));
     }
 
     @Test
@@ -1180,7 +1181,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「FIWAREのデータをElastic Stackで可視化する」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/352/");
+        assertThat(page).hasURL(fintan.url("/page/352/"));
     }
 
     @Test
@@ -1191,7 +1192,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1629");
         page.locator("text=最短でダサい画面とサヨナラする方法 前編").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1633/");
+        assertThat(page).hasURL(fintan.url("/page/1633/"));
     } 
 
     @Test
@@ -1202,7 +1203,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("177");
         page.locator("text=Tomory").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/181/");
+        assertThat(page).hasURL(fintan.url("/page/181/"));
     }
 
     @Test
@@ -1213,7 +1214,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("471");
         page.locator("text=Architecture Decision Records導入事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1636/");
+        assertThat(page).hasURL(fintan.url("/page/1636/"));
     } 
 
     @Test
@@ -1224,7 +1225,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("374");
         page.locator("text=モニタリング、監視、ログ収集の実践例（AWS）").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1608/");
+        assertThat(page).hasURL(fintan.url("/page/1608/"));
     } 
 
     @Test
@@ -1235,7 +1236,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("384");
         page.locator("text=フレームワーク開発").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1590/");
+        assertThat(page).hasURL(fintan.url("/page/1590/"));
     }
 
     @Test
@@ -1246,7 +1247,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=バックエンドはサービス開発リファレンスを使って、フロントエンドは自前で作成してみた").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/446/");
+        assertThat(page).hasURL(fintan.url("/page/446/"));
     } 
 
     @Test
@@ -1257,7 +1258,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -1268,7 +1269,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスを使ってWebアプリケーションを作成してみよう＜導入編＞").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/424/");
+        assertThat(page).hasURL(fintan.url("/page/424/"));
     }
 
     @Test
@@ -1279,7 +1280,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスを使って1画面作成してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/430/");
+        assertThat(page).hasURL(fintan.url("/page/430/"));
     }
 
     @Test
@@ -1290,7 +1291,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスを使ってREST APIを1つ作成してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/426/");
+        assertThat(page).hasURL(fintan.url("/page/426/"));
     }
 
     @Test
@@ -1301,7 +1302,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスを使ってバリデーションしてみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/421/");
+        assertThat(page).hasURL(fintan.url("/page/421/"));
     }
 
     @Test
@@ -1312,7 +1313,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスを使ってファイルダウンロードを実装してみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/418/");
+        assertThat(page).hasURL(fintan.url("/page/418/"));
     }
 
     @Test
@@ -1323,7 +1324,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスを使ってCSRF対策をしてみよう").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/428/");
+        assertThat(page).hasURL(fintan.url("/page/428/"));
     }
 
     @Test
@@ -1334,7 +1335,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("438");
         page.locator("text=サービス開発リファレンスの方式設計ガイドを使ってみよう").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/432/");
+        assertThat(page).hasURL(fintan.url("/page/432/"));
     }
 
     @Test
@@ -1345,7 +1346,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("393");
         page.locator("text=2019年度TISインターンシップ in 会津 (企画実践プログラミングコース)").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/336/");
+        assertThat(page).hasURL(fintan.url("/page/336/"));
     } 
 
     @Test
@@ -1356,7 +1357,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("384");
         page.locator("text=他部門に対する技術支援").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/385/");
+        assertThat(page).hasURL(fintan.url("/page/385/"));
     }
 
     @Test
@@ -1367,11 +1368,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("358");
         page.locator("text=詳細はWebアプリケーションのパフォーマンスチューニング事例（Python）参照 >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/460/");
+        assertThat(page).hasURL(fintan.url("/page/460/"));
 
         blogDetailPage.navigate("358");
         page.locator("text=Webアプリケーションのパフォーマンスチューニング事例（Python）- Redisでメモリを大量消費").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/460/#user-content-Redis%E3%81%A7%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%92%E5%A4%A7%E9%87%8F%E6%B6%88%E8%B2%BB");
+        assertThat(page).hasURL(fintan.url("/page/460/#user-content-Redis%E3%81%A7%E3%83%A1%E3%83%A2%E3%83%AA%E3%82%92%E5%A4%A7%E9%87%8F%E6%B6%88%E8%B2%BB"));
 
 
     } 
@@ -1384,7 +1385,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("2157");
         page.locator("text=https://fintan.jp/?p=5187").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/383/");
+        assertThat(page).hasURL(fintan.url("/page/383/"));
     } 
 
     @Test
@@ -1395,7 +1396,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("332");
         page.locator("text=Zoomを利用したリモート形式の新人研修実施の事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1441/");
+        assertThat(page).hasURL(fintan.url("/page/1441/"));
     } 
 
     @Test
@@ -1406,7 +1407,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("384");
         page.locator("text=鍵ファイルの生成と取得で色々調べた話").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1532/");
+        assertThat(page).hasURL(fintan.url("/page/1532/"));
     }
 
     @Test
@@ -1417,7 +1418,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("384");
         page.locator("text=リファレンス実装の公開").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/412/");
+        assertThat(page).hasURL(fintan.url("/page/412/"));
     }
 
     @Test
@@ -1428,15 +1429,15 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Springアプリ開発ノウハウ集").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1435/");
+        assertThat(page).hasURL(fintan.url("/page/1435/"));
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Springアプリ開発ノウハウ集").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1435/");
+        assertThat(page).hasURL(fintan.url("/page/1435/"));
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Springアプリ開発ノウハウ集").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1435/");
+        assertThat(page).hasURL(fintan.url("/page/1435/"));
     }
 
     @Test
@@ -1447,7 +1448,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1629");
         page.locator("text=最短でダサい画面とサヨナラする方法 後編").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1635/");
+        assertThat(page).hasURL(fintan.url("/page/1635/"));
     }
 
     @Test
@@ -1458,7 +1459,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("455");
         page.locator("text=イベントレポート").nth(3).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/458/");
+        assertThat(page).hasURL(fintan.url("/page/458/"));
     } 
 
     @Test
@@ -1469,7 +1470,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("424");
         page.locator("text=サービス開発リファレンスのハンズオンを作成した話").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/436/");
+        assertThat(page).hasURL(fintan.url("/page/436/"));
     }
 
     @Test
@@ -1480,7 +1481,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("456");
         page.locator("text=Data URI形式の画像をS3へ保存してURLを取得する").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/348/");
+        assertThat(page).hasURL(fintan.url("/page/348/"));
     }
 
     @Test
@@ -1491,7 +1492,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("471");
         page.locator("text=AndroidアプリのUIテスト自動化事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/93/");
+        assertThat(page).hasURL(fintan.url("/page/93/"));
     }
 
     @Test
@@ -1502,7 +1503,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("393");
         page.locator("text=2019年度TISインターンシップ in 会津 (Nablarch開発体験コース)").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/334/");
+        assertThat(page).hasURL(fintan.url("/page/334/"));
     }
 
     @Test
@@ -1513,7 +1514,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("393");
         page.locator("text=Nablarch、Lernaなど >> a").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/314/");
+        assertThat(page).hasURL(fintan.url("/page/314/"));
     }
 
     @Test
@@ -1524,7 +1525,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("393");
         page.locator("article >> text=Lerna").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/503/");
+        assertThat(page).hasURL(fintan.url("/page/503/"));
     }
 
     @Test
@@ -1535,7 +1536,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("393");
         page.locator("text=Nablarch開発標準").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/286/");
+        assertThat(page).hasURL(fintan.url("/page/286/"));
     }
 
     @Test
@@ -1546,7 +1547,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("471");
         page.locator("text=JJUG CCC 2019 Springで登壇してきました！").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/357/");
+        assertThat(page).hasURL(fintan.url("/page/357/"));
     }
 
     @Test
@@ -1557,7 +1558,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("455");
         page.locator("text=イベントレポート").nth(2).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/329/");
+        assertThat(page).hasURL(fintan.url("/page/329/"));
     }
 
     @Test
@@ -1568,7 +1569,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「AWS Amplifyを用いたオンラインチャットアプリのバックエンド開発ブログ」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/341/");
+        assertThat(page).hasURL(fintan.url("/page/341/"));
     }
 
     @Test
@@ -1579,7 +1580,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「デザイナー&エンジニア協業で得た TIPS」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1524/");
+        assertThat(page).hasURL(fintan.url("/page/1524/"));
     }
 
     @Test
@@ -1590,7 +1591,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「Amazon Cognito User Pool を用いたWebサービスにおけるユーザー管理・運用の事例」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/338/");
+        assertThat(page).hasURL(fintan.url("/page/338/"));
     }
 
     @Test
@@ -1601,7 +1602,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("458");
         page.locator("text=「iPhoneでバーチャルキーボード表示時に固定要素が画面外に消える問題を解決する」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/355/");
+        assertThat(page).hasURL(fintan.url("/page/355/"));
     }
 
     @Test
@@ -1612,7 +1613,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("456");
         page.locator("text=関ジャバ’19 8月度 イベントレポート").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1729/");
+        assertThat(page).hasURL(fintan.url("/page/1729/"));
     }
 
     @Test
@@ -1623,7 +1624,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("280");
         page.locator("text=Fintan – スプリント開始条件チェックリスト").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/269/");
+        assertThat(page).hasURL(fintan.url("/page/269/"));
     }
 
     @Test
@@ -1634,7 +1635,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("233");
         page.locator("text=Nablarchには、2020年9月29日にリリースされた5u18でクラウドネイティブ対応というものが入っています。 これは、NablarchをAWSやAzur >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1443/");
+        assertThat(page).hasURL(fintan.url("/page/1443/"));
     } 
 
     @Test
@@ -1645,7 +1646,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("233");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -1656,7 +1657,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("280");
         page.locator("text=Fintan – スプリントの見通し確認ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/267/");
+        assertThat(page).hasURL(fintan.url("/page/267/"));
     }
 
     @Test
@@ -1667,7 +1668,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("177");
         page.locator("text=インサイドセールス事業").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/244/");
+        assertThat(page).hasURL(fintan.url("/page/244/"));
     }
 
     @Test
@@ -1678,7 +1679,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1629");
         page.locator("text=SEとデザイナーの思考の違いから学ぶ画面デザインの基礎講座").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1631/");
+        assertThat(page).hasURL(fintan.url("/page/1631/"));
     }
 
     @Test
@@ -1689,7 +1690,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=Azure DevOpsを活用したCI（ビルドパイプライン）の構築例 – 背景").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1556/#user-content-background");
+        assertThat(page).hasURL(fintan.url("/page/1556/#user-content-background"));
     } 
 
     @Test
@@ -1700,7 +1701,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("341");
         page.locator("text=なお、GraphQLの有用性の詳細な説明がFintanのAWS AppSync(GraphQL)を用いたバックエンドの構築事例に掲載されています。ご興味があれば >> a").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/343/");
+        assertThat(page).hasURL(fintan.url("/page/343/"));
     }
 
     @Test
@@ -1711,7 +1712,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("280");
         page.locator("text=Fintan – ワーキングアグリーメント").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/274/");
+        assertThat(page).hasURL(fintan.url("/page/274/"));
     }
 
     @Test
@@ -1722,7 +1723,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("177");
         page.locator("text=SDGs事業").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/179/");
+        assertThat(page).hasURL(fintan.url("/page/179/"));
     }
 
     @Test
@@ -1733,7 +1734,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("177");
         page.locator("text=「ステージ・ゲートプロセスに基づく新規事業開発」").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/175/");
+        assertThat(page).hasURL(fintan.url("/page/175/"));
     }
 
     @Test
@@ -1744,7 +1745,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=全体テスト計画ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1458/");
+        assertThat(page).hasURL(fintan.url("/page/1458/"));
     }
 
     @Test
@@ -1755,7 +1756,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("456");
         page.locator("text=ContextAPIを使ってメッセージをローカライズ").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/346/");
+        assertThat(page).hasURL(fintan.url("/page/346/"));
     }
 
     @Test
@@ -1766,7 +1767,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Nablarch System Development Guide").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1667/");
+        assertThat(page).hasURL(fintan.url("/en/page/1667/"));
     } 
 
     @Test
@@ -1777,7 +1778,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1715");
         page.locator("text=Fintan – Programmers Self Checklist").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1721/");
+        assertThat(page).hasURL(fintan.url("/en/page/1721/"));
     } 
 
     @Test
@@ -1788,7 +1789,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Overall Test Plan Guide").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1683/");
+        assertThat(page).hasURL(fintan.url("/en/page/1683/"));
     }
 
     @Test
@@ -1799,7 +1800,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Training Content *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/259/");
+        assertThat(page).hasURL(fintan.url("/page/259/"));
     }
 
     @Test
@@ -1810,7 +1811,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Engineering Guide For Service Development *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/");
+        assertThat(page).hasURL(fintan.url("/page/1455/"));
     }
 
     @Test
@@ -1821,7 +1822,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Service Development reference for SPA + REST API configuration *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -1832,7 +1833,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Requirements Definition Framework *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1672/");
+        assertThat(page).hasURL(fintan.url("/page/1672/"));
     }
 
     @Test
@@ -1843,7 +1844,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Test Type & Viewpoint Catalog *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1456/");
+        assertThat(page).hasURL(fintan.url("/page/1456/"));
     }
 
     @Test
@@ -1854,7 +1855,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Application Architecture Design Document Sample *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/317/");
+        assertThat(page).hasURL(fintan.url("/page/317/"));
     }
 
     @Test
@@ -1865,7 +1866,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("text=Collaborage *").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1540/");
+        assertThat(page).hasURL(fintan.url("/page/1540/"));
     }
 
     @Test
@@ -1876,10 +1877,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("a:has-text(\"3\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1954/3/");
+        assertThat(page).hasURL(fintan.url("/en/page/1954/3/"));
 
         page.locator("text=Nablarch System Development Guide.").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1667/");
+        assertThat(page).hasURL(fintan.url("/en/page/1667/"));
     }
 
     @Test
@@ -1890,10 +1891,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1954");
         page.locator("a:has-text(\"3\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1954/3/");
+        assertThat(page).hasURL(fintan.url("/en/page/1954/3/"));
 
         page.locator("text=Training Contents(Only Japanese Edition)").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/259/");
+        assertThat(page).hasURL(fintan.url("/page/259/"));
     }
 
     @Test
@@ -1904,10 +1905,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("181");
         page.locator("li:nth-child(3) > .post-page-numbers").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/181/3/");
+        assertThat(page).hasURL(fintan.url("/page/181/3/"));
 
         page.locator("text=モバイルアプリケーションのセキュリティと認証").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/164/");
+        assertThat(page).hasURL(fintan.url("/page/164/"));
     } 
 
     @Test
@@ -1918,10 +1919,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("181");
         page.locator("li:nth-child(3) > .post-page-numbers").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/181/3/");
+        assertThat(page).hasURL(fintan.url("/page/181/3/"));
 
         page.locator("text=テストのためのモバイルアプリケーション配布").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/163/");
+        assertThat(page).hasURL(fintan.url("/page/163/"));
     }
 
     @Test
@@ -1932,7 +1933,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("181");
         page.locator("text=ステージ・ゲートプロセス").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/175/");
+        assertThat(page).hasURL(fintan.url("/page/175/"));
     }
 
     @Test
@@ -1943,10 +1944,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("181");
         page.locator("li:nth-child(2) > .post-page-numbers").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/181/2/");
+        assertThat(page).hasURL(fintan.url("/page/181/2/"));
 
         page.locator("text=スキルマップ運用ガイド | Fintan").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/257/");
+        assertThat(page).hasURL(fintan.url("/page/257/"));
     }
 
     @Test
@@ -1957,10 +1958,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("181");
         page.locator("text=6").nth(3).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/181/6/");
+        assertThat(page).hasURL(fintan.url("/page/181/6/"));
 
         page.locator("text=ステージ・ゲートプロセスに基づく新規事業開発").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/175/");
+        assertThat(page).hasURL(fintan.url("/page/175/"));
     }
 
     @Test
@@ -1971,7 +1972,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Role assignment sheet for waterfall development").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1717/");
+        assertThat(page).hasURL(fintan.url("/en/page/1717/"));
     }
 
     @Test
@@ -1982,7 +1983,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Requirements definition framework").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1672/");
+        assertThat(page).hasURL(fintan.url("/page/1672/"));
     }
 
     @Test
@@ -1993,7 +1994,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Requirements definition basic training text").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1674/");
+        assertThat(page).hasURL(fintan.url("/page/1674/"));
     }
 
     @Test
@@ -2004,7 +2005,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Sample document of application architecture design").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/317/");
+        assertThat(page).hasURL(fintan.url("/page/317/"));
     }
 
     @Test
@@ -2015,7 +2016,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Overall test plan guide").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1683/");
+        assertThat(page).hasURL(fintan.url("/en/page/1683/"));
     }
 
     @Test
@@ -2026,7 +2027,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Test type and viewpoint catalog").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1456/");
+        assertThat(page).hasURL(fintan.url("/page/1456/"));
     }
 
     @Test
@@ -2037,7 +2038,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=Deliverables self-check list for programmers").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1440/");
+        assertThat(page).hasURL(fintan.url("/page/1440/"));
     }
 
     @Test
@@ -2048,10 +2049,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1667");
         page.locator("text=7").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1667/7/");
+        assertThat(page).hasURL(fintan.url("/en/page/1667/7/"));
 
         page.locator("text=test type and test viewpoint catalog").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1456/");
+        assertThat(page).hasURL(fintan.url("/page/1456/"));
     }
 
     @Test
@@ -2062,7 +2063,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=ウォーターフォール開発における役割分担シート").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1436/");
+        assertThat(page).hasURL(fintan.url("/page/1436/"));
     }
 
     @Test
@@ -2073,7 +2074,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – フルスタックエンジニア育成に関する取り組み").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1428/");
+        assertThat(page).hasURL(fintan.url("/page/1428/"));
     }
 
     @Test
@@ -2084,7 +2085,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – 結合テスト自動化事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1534/");
+        assertThat(page).hasURL(fintan.url("/page/1534/"));
     }
 
     @Test
@@ -2095,7 +2096,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – AWSの開発者用ツールを活用したCI/CD構成例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1550/");
+        assertThat(page).hasURL(fintan.url("/page/1550/"));
     }
 
     @Test
@@ -2106,7 +2107,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=プロダクトオーナーの役割").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/272/");
+        assertThat(page).hasURL(fintan.url("/page/272/"));
     }
 
     @Test
@@ -2117,7 +2118,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – 性能テスト自動化事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1527/");
+        assertThat(page).hasURL(fintan.url("/page/1527/"));
     }
 
     @Test
@@ -2128,7 +2129,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – SPA＋REST APIにおけるセッションを使った認証の実践例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/373/");
+        assertThat(page).hasURL(fintan.url("/page/373/"));
     }
 
     @Test
@@ -2139,7 +2140,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – ヘキサゴナルアーキテクチャ導入事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/397/");
+        assertThat(page).hasURL(fintan.url("/page/397/"));
     }
 
     @Test
@@ -2150,7 +2151,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=要件定義基礎研修テキスト").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1674/");
+        assertThat(page).hasURL(fintan.url("/page/1674/"));
     }
 
     @Test
@@ -2161,7 +2162,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=Doneの定義").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/309/");
+        assertThat(page).hasURL(fintan.url("/page/309/"));
     }
 
     @Test
@@ -2172,7 +2173,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – フルスタックエンジニアの成熟度モデル").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1427/");
+        assertThat(page).hasURL(fintan.url("/page/1427/"));
     }
 
     @Test
@@ -2183,7 +2184,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Azure Boardsを使用したスクラム実践例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/278/");
+        assertThat(page).hasURL(fintan.url("/page/278/"));
     }
 
     @Test
@@ -2194,7 +2195,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=スクラム開発プラクティス集").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/262/");
+        assertThat(page).hasURL(fintan.url("/page/262/"));
     }
 
     @Test
@@ -2205,7 +2206,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=スプリント開始条件チェックリスト").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/269/");
+        assertThat(page).hasURL(fintan.url("/page/269/"));
     }
 
     @Test
@@ -2216,7 +2217,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=スクラム概論").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/265/");
+        assertThat(page).hasURL(fintan.url("/page/265/"));
     }
 
     @Test
@@ -2227,7 +2228,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=ワーキングアグリーメント").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/274/");
+        assertThat(page).hasURL(fintan.url("/page/274/"));
     }
 
     @Test
@@ -2238,7 +2239,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("278");
         page.locator("text=スプリント運営ガイド").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/311/");
+        assertThat(page).hasURL(fintan.url("/page/311/"));
     }
 
     @Test
@@ -2249,7 +2250,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=PG・UT作業の完了条件チェックリスト").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1433/");
+        assertThat(page).hasURL(fintan.url("/page/1433/"));
     }
 
     @Test
@@ -2260,7 +2261,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Reactを使ったフロントエンドのアーキテクチャ事例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/366/");
+        assertThat(page).hasURL(fintan.url("/page/366/"));
     }
 
     @Test
@@ -2271,7 +2272,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=プログラマー向け成果物セルフチェックリスト").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1440/");
+        assertThat(page).hasURL(fintan.url("/page/1440/"));
     }
 
     @Test
@@ -2282,10 +2283,10 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("252");
         page.locator("text=7").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/252/7/");
+        assertThat(page).hasURL(fintan.url("/page/252/7/"));
 
         page.locator("text=テスト種別＆テスト観点カタログ").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1456/");
+        assertThat(page).hasURL(fintan.url("/page/1456/"));
     }
 
     @Test
@@ -2296,7 +2297,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Android開発におけるモジュール化手法").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/99/");
+        assertThat(page).hasURL(fintan.url("/page/99/"));
     }
 
     @Test
@@ -2307,7 +2308,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – SPA＋REST APIのシステム構成例（AWS）").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/374/");
+        assertThat(page).hasURL(fintan.url("/page/374/"));
     }
 
     @Test
@@ -2318,7 +2319,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – モニタリング、監視、ログ収集の実践例（AWS）").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1608/");
+        assertThat(page).hasURL(fintan.url("/page/1608/"));
     }
 
     @Test
@@ -2329,7 +2330,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=クラウドネイティブなアプリケーションの開発").nth(1).click();
-        // assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/2/");
+        // assertThat(page).hasURL(fintan.url("/page/1455/2/"));
         // TODO: 「/page/1455/2/」に修正していいかの確認できたらまたこのテストを修正
         assertThat(page).hasURL("https://fintan.jp/wp-content/uploads/2020/08/05_test_flow.png");
     }
@@ -2342,11 +2343,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
 
         blogDetailPage.navigate("1455");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -2357,11 +2358,11 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
 
         blogDetailPage.navigate("1455");
         page.locator("text=SPA + REST API構成のサービス開発リファレンス").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
+        assertThat(page).hasURL(fintan.url("/page/1453/"));
     }
 
     @Test
@@ -2372,7 +2373,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=Fintan – Azure DevOpsを活用したCI（ビルドパイプライン）の構築例").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1556/");
+        assertThat(page).hasURL(fintan.url("/page/1556/"));
     }
 
     @Test
@@ -2383,9 +2384,9 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("a:has-text(\"2\")").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/2/");
+        assertThat(page).hasURL(fintan.url("/page/1455/2/"));
 
         page.locator("text=Fintan – Springアプリ開発ノウハウ集").click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1435/");
+        assertThat(page).hasURL(fintan.url("/page/1435/"));
     }
 }

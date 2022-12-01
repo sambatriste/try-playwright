@@ -28,7 +28,7 @@ public class Fintan {
 
     private static final Fintan soloInstance = new Fintan();
 
-    static Fintan getInstance() {
+    public static Fintan getInstance() {
         return soloInstance;
     }
 
