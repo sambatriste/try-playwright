@@ -13,8 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(PlaywrightExtension.class)
@@ -86,7 +85,7 @@ public class CategoryListPageTest {
     }
 
     @Test
-    @DisplayName("カテゴリの件数が正しいこと")
+    @DisplayName("カテゴリ一覧で表示される件数とカテゴリーページの記事数が一致すること")
     void checkCategoryPostCount(Page page) {
         CategoryListPage categoryListPage = new CategoryListPage(page);
         categoryListPage.navigate();
@@ -99,17 +98,18 @@ public class CategoryListPageTest {
             String content = category.textContent();
             // ()の中の数字を抽出
             Matcher matcher = Pattern.compile("(?<=\\().*?(?=\\))").matcher(content);
-            if (!matcher.find()) {
-                fail("Not match found.");
-            }
+            assertTrue(matcher.find(), "content count not found. [" + content + "]");
+
             int sumCount = Integer.parseInt(matcher.group(0));
 
-            // カテゴリトップページへ遷移し、表示されている記事の数を取得する
-            String categoryTopUrl = category.getAttribute("href");
-            page.navigate(categoryTopUrl);
-            int postCount = page.locator("ul.o-card-list > li.o-card").count();
+            // カテゴリトップページへ遷移し、表示されている記事の数をカウントする
+            category.click();
 
-            assertEquals(sumCount, postCount);
+            Locator postCards = page.locator("ul.o-card-list > li.o-card");
+            postCards.first().waitFor();   // count()は0個であることもありえるので最初の要素をwaitする
+            int postCount = postCards.count();
+
+            assertEquals(sumCount, postCount, "count must be equal. [" + content + "]");
 
             // カテゴリ一覧ページへと戻る
             categoryListPage.navigate();
