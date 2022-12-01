@@ -27,6 +27,10 @@ public class BlogDetailPage extends PageTemplate {
         assertThat(page).hasTitle(titleName + " | Fintan");
     }
 
+    public void navigate(String pageId) {
+        page.navigate(fintan.url("/page/" + pageId + "/"));
+    }
+
     public void checkMetaDescription(String pageId, String expectMetaDescription) {
         page.navigate(fintan.url("/page/" + pageId + "/"));
         Locator metaDescription = getMetaDescription();
