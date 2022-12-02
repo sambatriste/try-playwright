@@ -5,6 +5,7 @@ import com.example.pages.BlogDetailPage;
 import com.example.pages.Fintan;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @ExtendWith(PlaywrightExtension.class)
+@Disabled("リンク修正作業の結果確認が終了したので")
 public class CheckRedirectLinkTest {
     private Fintan fintan = Fintan.getInstance();
 
