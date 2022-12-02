@@ -246,7 +246,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/250/」の記事の内部リンクが「/?p=8136」ではなく「/page/1874/」のようなものであること")
+    @DisplayName("「/page/250/」の記事の内部リンクが「/?p=8252」ではなく「/page/1874/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage250_5(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -617,7 +617,7 @@ public class CheckRedirectLinkTest {
         assertThat(page).hasURL(FINTAN_PROD_URL + "/page/418/");
     }
     @Test
-    @DisplayName("「/page/446/」の記事の内部リンクが「/?p=6433」ではなく「/page/418/」のようなものであること")
+    @DisplayName("「/page/446/」の記事の内部リンクが「/?p=6433」ではなく「/page/432/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage446_7(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -628,7 +628,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/446/」の記事の内部リンクが「/?p=6161」ではなく「/page/418/」のようなものであること")
+    @DisplayName("「/page/446/」の記事の内部リンクが「/?p=6161」ではなく「/page/426/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage446_8(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -660,14 +660,6 @@ public class CheckRedirectLinkTest {
         page.locator("text=サービス開発を進めていた西日本テクノロジー＆イノベーション室の浦上によるセッションです。 本セッションでは開発体制や進め方などをお話しました。 技術スタックにつ >> a").click();
         assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1639/");
     } 
-
-    @Test
-    @DisplayName("「/page/467/」の記事の内部リンクが「/?p=4048」ではなく「/page/1639/」のようなものであること")
-    @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
-    void checkInternalLinkForPage467_1(Page page) {
-        // 「/?p=4048」のリンクがあるが、遷移先のページが存在しない
-        // TODO: 著者にどの記事かを聞いて、修正が反映されたらまたこのテストを修正する
-    }
 
     @Test
     @DisplayName("「/page/428/」の記事の内部リンクが「/?p=6433」ではなく「/page/432/」のようなものであること")
@@ -777,7 +769,7 @@ public class CheckRedirectLinkTest {
     } 
 
     @Test
-    @DisplayName("「/page/1717/」の記事の内部リンクが「/?page_id=5803&lang=en」ではなく「/page/1890/」のようなものであること")
+    @DisplayName("「/page/1717/」の記事の内部リンクが「/?page_id=5803&lang=en」ではなく「/en/page/1890/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1717(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -796,7 +788,7 @@ public class CheckRedirectLinkTest {
         blogDetailPage.navigate("1868");
         page.locator("a:has-text(\"トレーニングコンテンツ\")").click();
         assertThat(page).hasURL(FINTAN_PROD_URL + "/page/259/");
-    }
+    } 
 
     @Test
     @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=4234」ではなく「/page/252/」のようなものであること")
@@ -810,7 +802,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=869」ではなく「/page/252/」のようなものであること")
+    @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=869」ではなく「/page/1455/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1868_2(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -832,7 +824,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=233」ではなく「/page/1453/」のようなものであること")
+    @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=233」ではなく「/page/1672/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1868_4(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -843,7 +835,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=45」ではなく「/page/1453/」のようなものであること")
+    @DisplayName("「/page/1868/」の記事の内部リンクが「/?p=45」ではなく「/page/1456/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1868_5(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1250,7 +1242,7 @@ public class CheckRedirectLinkTest {
     } 
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=5952」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=5952」ではなく「/page/1453/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_1(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1261,7 +1253,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6078」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6078」ではなく「/page/424/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_2(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1272,7 +1264,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6122」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6122」ではなく「/page/430/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_3(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1283,7 +1275,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6161」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6161」ではなく「/page/426/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_4(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1294,7 +1286,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6333」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6333」ではなく「/page/421/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_5(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1305,7 +1297,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6353」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6353」ではなく「/page/418/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_6(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1316,7 +1308,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6414」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6414」ではなく「/page/428/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_7(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1327,7 +1319,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6433」ではなく「/page/446/」のようなものであること")
+    @DisplayName("「/page/438/」の記事の内部リンクが「/?p=6433」ではなく「/page/432/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage438_8(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1410,7 +1402,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/384/」の記事の内部リンクが「/?p=6010」ではなく「/page/1532/」のようなものであること")
+    @DisplayName("「/page/384/」の記事の内部リンクが「/?p=6010」ではなく「/page/412/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage384_4(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1506,7 +1498,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/393/」の記事の内部リンクが「/?p=304」ではなく「/page/334/」のようなものであること")
+    @DisplayName("「/page/393/」の記事の内部リンクが「/?p=304」ではなく「/page/314/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage393_2(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1517,7 +1509,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/393/」の記事の内部リンクが「/?p=5946」ではなく「/page/334/」のようなものであること")
+    @DisplayName("「/page/393/」の記事の内部リンクが「/?p=5946」ではなく「/page/503/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage393_3(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1528,7 +1520,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/393/」の記事の内部リンクが「/?p=1145」ではなく「/page/334/」のようなものであること")
+    @DisplayName("「/page/393/」の記事の内部リンクが「/?p=1145」ではなく「/page/286/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage393_4(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1583,7 +1575,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/458/」の記事の内部リンクが「/?p=5593」ではなく「/page/1524/」のようなものであること")
+    @DisplayName("「/page/458/」の記事の内部リンクが「/?p=5593」ではなく「/page/338/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage458_6(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1594,7 +1586,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/458/」の記事の内部リンクが「/?p=5234」ではなく「/page/1524/」のようなものであること")
+    @DisplayName("「/page/458/」の記事の内部リンクが「/?p=5234」ではなく「/page/355/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage458_7(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1638,7 +1630,7 @@ public class CheckRedirectLinkTest {
     } 
 
     @Test
-    @DisplayName("「/page/233/」の記事の内部リンクが「/?p=5952」ではなく「/page/1443/」のようなものであること")
+    @DisplayName("「/page/233/」の記事の内部リンクが「/?p=5952」ではなく「/page/1453/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage233_1(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1759,7 +1751,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=5403&lang=en」ではなく「/page/1667/」のようなものであること")
+    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=5403&lang=en」ではなく「/en/page/1667/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1954(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1770,7 +1762,7 @@ public class CheckRedirectLinkTest {
     } 
 
     @Test
-    @DisplayName("「/page/1715/」の記事の内部リンクが「/?p=6243&lang=en」ではなく「/page/1721/」のようなものであること")
+    @DisplayName("「/page/1715/」の記事の内部リンクが「/?p=6243&lang=en」ではなく「/en/page/1721/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1715(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1781,7 +1773,7 @@ public class CheckRedirectLinkTest {
     } 
 
     @Test
-    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=6785&lang=en」ではなく「/page/1683/」のようなものであること")
+    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=6785&lang=en」ではなく「/en/page/1683/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1954_1(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1792,7 +1784,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=8039」ではなく「/page/256/」のようなものであること")
+    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=8039」ではなく「/page/259/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1954_2(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1814,7 +1806,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=5952」ではなく「/page/1455/」のようなものであること")
+    @DisplayName("「/page/1954/」の記事の内部リンクが「/?p=5952」ではなく「/page/1453/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1954_4(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1964,7 +1956,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1667/」の記事の内部リンクが「/?p=5513&lang=en」ではなく「/page/1717/」のようなものであること")
+    @DisplayName("「/page/1667/」の記事の内部リンクが「/?p=5513&lang=en」ではなく「/en/page/1717/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1667(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -1972,7 +1964,7 @@ public class CheckRedirectLinkTest {
         blogDetailPage.navigate("1667");
         page.locator("text=Role assignment sheet for waterfall development").click();
         assertThat(page).hasURL(FINTAN_PROD_URL + "/en/page/1717/");
-    }
+    } 
 
     @Test
     @DisplayName("「/page/1667/」の記事の内部リンクが「/?p=233」ではなく「/page/1672/」のようなものであること")
@@ -2008,7 +2000,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1667/」の記事の内部リンクが「/?p=6785&lang=en」ではなく「/page/1683/」のようなものであること")
+    @DisplayName("「/page/1667/」の記事の内部リンクが「/?p=6785&lang=en」ではなく「/en/page/1683/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1667_4(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -2275,7 +2267,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/252/」の記事の内部リンクが「/?p=45」ではなく「/page/1440/」のようなものであること")
+    @DisplayName("「/page/252/」の記事の内部リンクが「/?p=45」ではなく「/page/1456/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage252_7(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -2311,7 +2303,7 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1455/」の記事の内部リンクが「/?p=1266」ではなく「/page/374/」のようなものであること")
+    @DisplayName("「/page/1455/」の記事の内部リンクが「/?p=1266」ではなく「/page/1608/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1455_13(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
@@ -2329,9 +2321,7 @@ public class CheckRedirectLinkTest {
 
         blogDetailPage.navigate("1455");
         page.locator("text=クラウドネイティブなアプリケーションの開発").nth(1).click();
-        // assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/2/");
-        // TODO: 「/page/1455/2/」に修正していいかの確認できたらまたこのテストを修正
-        assertThat(page).hasURL("https://fintan.jp/wp-content/uploads/2020/08/05_test_flow.png");
+        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1455/2/");
     }
 
     @Test
@@ -2350,24 +2340,9 @@ public class CheckRedirectLinkTest {
     }
 
     @Test
-    @DisplayName("「/page/1455/」の記事の内部リンクが「/?p=5952」ではなく「/page/1453/」のようなものであること")
+    @DisplayName("「/page/1455/」の記事の内部リンクが「/?p=1339」ではなく「/page/1556/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
     void checkInternalLinkForPage1455_16(Page page) {
-        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
-
-        blogDetailPage.navigate("1455");
-        page.locator("text=SPA + REST API構成のサービス開発リファレンス").first().click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
-
-        blogDetailPage.navigate("1455");
-        page.locator("text=SPA + REST API構成のサービス開発リファレンス").nth(1).click();
-        assertThat(page).hasURL(FINTAN_PROD_URL + "/page/1453/");
-    }
-
-    @Test
-    @DisplayName("「/page/1455/」の記事の内部リンクが「/?p=1339」ではなく「/page/1453/」のようなものであること")
-    @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
-    void checkInternalLinkForPage1455_17(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
 
         blogDetailPage.navigate("1455");
@@ -2378,7 +2353,7 @@ public class CheckRedirectLinkTest {
     @Test
     @DisplayName("「/page/1455/」の記事の内部リンクが「/?p=969」ではなく「/page/1435/」のようなものであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事内容が本番に追いついてない為")
-    void checkInternalLinkForPage1455_18(Page page) {
+    void checkInternalLinkForPage1455_17(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
 
         blogDetailPage.navigate("1455");
