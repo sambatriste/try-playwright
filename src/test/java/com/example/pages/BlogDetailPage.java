@@ -3,12 +3,14 @@ package com.example.pages;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * 記事詳細ページ。
- *
  */
 public class BlogDetailPage extends PageTemplate {
 
@@ -51,5 +53,26 @@ public class BlogDetailPage extends PageTemplate {
         page.navigate(fintan.url("/page/" + pageId + "/"));
         Locator tableOfContents = page.locator("ol.post-table li");
         assertThat(tableOfContents).hasCount(tableOfContentsCount);
+    }
+
+    public void checkHeadingUniqueId(String pageId) {
+        page.navigate(fintan.url("/page/" + pageId + "/"));
+        Locator headings = page.locator("h2, h3, h4, h5");
+        Map<String, Integer> counter = new HashMap<>();
+        for (int i = 0; i < headings.count(); i++) {
+            Locator heading = headings.nth(i);
+            String name = heading.textContent();
+            String id = heading.getAttribute("id");
+
+            // 同じ名前の場合、末尾に_と数字を付与するため
+            int current = counter.getOrDefault(name, 0);
+            int next = current + 1;
+            counter.put(name, next);
+            if (current != 0) {
+                name = name + "_" + next;
+            }
+            name = name.replaceAll("\\s|;/g", ""); // 空白を削除
+            assertEquals(name, id, "count must be equal. pageId: [" + pageId + "]");
+        }
     }
 }

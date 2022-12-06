@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.EnabledOnEnvironment;
 import com.example.pages.BlogDetailPage;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Page;
@@ -82,5 +83,23 @@ public class BlogDetailPageTest {
         );
 
         idTableOfContentCountMap.forEach((id, count) -> blogDetailPage.checkTableOfContentsDomElement(id, count));
+    }
+
+    @Test
+    @DisplayName("見出しのID属性に一意な名前がついていること")
+    @EnabledOnEnvironment(production = false, reason = "テスト環境と本番環境で異なる記事の確認の為")
+    void checkHeadingUniqueIdTestEnv(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        String pagaId = "9060";
+        blogDetailPage.checkHeadingUniqueId(pagaId);
+    }
+
+    @Test
+    @DisplayName("見出しのID属性に一意な名前がついていること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境と本番環境で異なる記事の確認の為")
+    void checkHeadingUniqueIdProductionEnv(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        String pagaId = "175";
+        blogDetailPage.checkHeadingUniqueId(pagaId);
     }
 }
