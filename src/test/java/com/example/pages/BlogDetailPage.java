@@ -57,7 +57,7 @@ public class BlogDetailPage extends PageTemplate {
 
     public void checkHeadingUniqueId(String pageId) {
         page.navigate(fintan.url("/page/" + pageId + "/"));
-        Locator headings = page.locator("h2, h3, h4, h5");
+        Locator headings = page.locator(".article-content").locator("h2, h3, h4, h5");
         Map<String, Integer> counter = new HashMap<>();
         for (int i = 0; i < headings.count(); i++) {
             Locator heading = headings.nth(i);
@@ -71,7 +71,7 @@ public class BlogDetailPage extends PageTemplate {
             if (current != 0) {
                 name = name + "_" + next;
             }
-            name = name.replaceAll("\\s|;/g", ""); // 空白を削除
+            name = name.replaceAll("\\s|\\u00a0", "");  // 空白とnbspを削除
             assertEquals(name, id, "count must be equal. pageId: [" + pageId + "]");
         }
     }
