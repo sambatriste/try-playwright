@@ -91,6 +91,9 @@ public class BlogDetailPageTest {
     void checkHeadingUniqueIdTestEnv(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         String pageId = "9060";
+
+        // 本来であればサイドメニューの見出しをクリックした際に、適切な箇所へ遷移することの確認をしたいが
+        // アサーションが難しいため、ID属性が一意になっていることをテストすることで確認している
         blogDetailPage.checkHeadingUniqueId(pageId);
     }
 
@@ -100,6 +103,9 @@ public class BlogDetailPageTest {
     void checkHeadingUniqueIdProductionEnv(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         String pageId = "175";
+
+        // 本来であればサイドメニューの見出しをクリックした際に、適切な箇所へ遷移することの確認をしたいが
+        // アサーションが難しいため、ID属性が一意になっていることをテストすることで確認している
         blogDetailPage.checkHeadingUniqueId(pageId);
     }
 }
