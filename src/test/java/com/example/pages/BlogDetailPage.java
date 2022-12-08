@@ -34,7 +34,7 @@ public class BlogDetailPage extends PageTemplate {
     }
 
     public void checkMetaDescription(String pageId, String expectMetaDescription) {
-        page.navigate(fintan.url("/page/" + pageId + "/"));
+        page.navigate(fintan.pageUrl(pageId));
         Locator metaDescription = getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
@@ -43,20 +43,20 @@ public class BlogDetailPage extends PageTemplate {
     }
 
     public void checkAuthorNameDomElement(String pageId, String expectedAuthorName) {
-        page.navigate(fintan.url("/page/" + pageId + "/"));
+        page.navigate(fintan.pageUrl(pageId));
         Locator authorDetail = page.locator(".post-author .info div a").first();
         assertThat(authorDetail).hasCount(1);
         assertEquals(expectedAuthorName, authorDetail.textContent());
     }
 
     public void checkTableOfContentsDomElement(String pageId, int tableOfContentsCount) {
-        page.navigate(fintan.url("/page/" + pageId + "/"));
+        page.navigate(fintan.pageUrl(pageId));
         Locator tableOfContents = page.locator("ol.post-table li");
         assertThat(tableOfContents).hasCount(tableOfContentsCount);
     }
 
     public void checkHeadingUniqueId(String pageId) {
-        page.navigate(fintan.url("/page/" + pageId + "/"));
+        page.navigate(fintan.pageUrl(pageId));
         Locator headings = page.locator(".article-content").locator("h2, h3, h4, h5");
         Map<String, Integer> counter = new HashMap<>();
         for (int i = 0; i < headings.count(); i++) {
@@ -72,7 +72,7 @@ public class BlogDetailPage extends PageTemplate {
                 name = name + "_" + next;
             }
             name = name.replaceAll("\\s|\\u00a0", "");  // 空白とnbspを削除
-            assertEquals(name, id, "count must be equal. pageId: [" + pageId + "]");
+            assertEquals(id, name);
         }
     }
 }
