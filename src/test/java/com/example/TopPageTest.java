@@ -299,4 +299,14 @@ public class TopPageTest {
         Locator titleDivElement = page.locator(".c-top__latest .o-card-list div.o-card__title");
         assertThat(titleDivElement).hasCount(LATEST_BLOG_COUNT_TOP_PAGE);
     }
+
+    @Test
+    @DisplayName("鯖の魚の画像がwebpフォーマットの画像であること")
+    void checkFishImageFormat(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator webpImageElement = page.locator(".c-top__main-fish img").first();
+        String actualImageFilePath = webpImageElement.getAttribute("src");
+        assertEquals(topPage.fintan.url() + "/wp-content/themes/fintan/img/top/main-fish.webp", actualImageFilePath);
+    }
 }
