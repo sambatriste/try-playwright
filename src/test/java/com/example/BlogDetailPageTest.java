@@ -90,8 +90,8 @@ public class BlogDetailPageTest {
     @EnabledOnEnvironment(production = false, reason = "テスト環境と本番環境で異なる記事の確認の為")
     void checkHeadingUniqueIdTestEnv(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
-        String pagaId = "9060";
-        blogDetailPage.checkHeadingUniqueId(pagaId);
+        String pageId = "9060";
+        blogDetailPage.checkHeadingUniqueId(pageId);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class BlogDetailPageTest {
     @EnabledOnEnvironment(production = true, reason = "テスト環境と本番環境で異なる記事の確認の為")
     void checkHeadingUniqueIdProductionEnv(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
-        String pagaId = "175";
-        blogDetailPage.checkHeadingUniqueId(pagaId);
+        String pageId = "175";
+        blogDetailPage.checkHeadingUniqueId(pageId);
     }
 }
