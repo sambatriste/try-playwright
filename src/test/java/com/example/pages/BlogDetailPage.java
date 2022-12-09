@@ -22,19 +22,23 @@ public class BlogDetailPage extends PageTemplate {
      * 記事詳細に遷移する。
      */
     public void navigate(String pageId, String titleName) {
-        page.navigate(fintan.url("/page/" + pageId + "/"));
+        navigate(pageId);
         Locator title = page.locator("title");
         // AIOSEOのプラグインにより、titleが複数になってしまうことがある
         assertThat(title).hasCount(1);
         assertThat(page).hasTitle(titleName + " | Fintan");
     }
 
+    /**
+     * 記事詳細に遷移する。
+     * @param pageId ページID （/page/XXXX/ のXXXXにあたる数字）
+     */
     public void navigate(String pageId) {
-        page.navigate(fintan.url("/page/" + pageId + "/"));
+        page.navigate(fintan.pageUrl(pageId));
     }
 
     public void checkMetaDescription(String pageId, String expectMetaDescription) {
-        page.navigate(fintan.pageUrl(pageId));
+        navigate(pageId);
         Locator metaDescription = getMetaDescription();
         // AIOSEOのプラグインにより、descriptionが複数になってしまうことがある
         assertThat(metaDescription).hasCount(1);
@@ -43,20 +47,20 @@ public class BlogDetailPage extends PageTemplate {
     }
 
     public void checkAuthorNameDomElement(String pageId, String expectedAuthorName) {
-        page.navigate(fintan.pageUrl(pageId));
+        navigate(pageId);
         Locator authorDetail = page.locator(".post-author .info div a").first();
         assertThat(authorDetail).hasCount(1);
         assertEquals(expectedAuthorName, authorDetail.textContent());
     }
 
     public void checkTableOfContentsDomElement(String pageId, int tableOfContentsCount) {
-        page.navigate(fintan.pageUrl(pageId));
+        navigate(pageId);
         Locator tableOfContents = page.locator("ol.post-table li");
         assertThat(tableOfContents).hasCount(tableOfContentsCount);
     }
 
     public void checkHeadingUniqueId(String pageId) {
-        page.navigate(fintan.pageUrl(pageId));
+        navigate(pageId);
         Locator headings = page.locator(".article-content").locator("h2, h3, h4, h5");
         Map<String, Integer> counter = new HashMap<>();
         for (int i = 0; i < headings.count(); i++) {
