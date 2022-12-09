@@ -3,12 +3,15 @@ package com.example;
 import com.example.config.EnabledOnEnvironment;
 import com.example.pages.BlogDetailPage;
 import com.example.playwright.PlaywrightExtension;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(PlaywrightExtension.class)
 public class BlogDetailPageTest {
@@ -107,5 +110,18 @@ public class BlogDetailPageTest {
         // 本来であればサイドメニューの見出しをクリックした際に、適切な箇所へ遷移することの確認をしたいが
         // アサーションが難しいため、ID属性が一意になっていることをテストすることで確認している
         blogDetailPage.checkHeadingUniqueId(pageId);
+    }
+
+    @Test
+    @DisplayName("「/page/3527/」の記事内の動画サイズが固定ではなくレスポンシブ的な設定になっていること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境の記事が本番環境に追いついていないため")
+    void checkVideoSize(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        blogDetailPage.navigate("3527");
+        Locator video = page.locator("video").first();
+        String actualVideoWidth = video.getAttribute("width");
+        String actualVideoHeight = video.getAttribute("height");
+        assertEquals("100%", actualVideoWidth);
+        assertEquals("100%", actualVideoHeight);
     }
 }
