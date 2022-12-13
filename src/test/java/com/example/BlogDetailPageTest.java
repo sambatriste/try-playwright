@@ -124,4 +124,44 @@ public class BlogDetailPageTest {
         assertEquals("100%", actualVideoWidth);
         assertEquals("100%", actualVideoHeight);
     }
+
+    @Test
+    @DisplayName("更新日のない記事のtimeタグに投稿日がdatetimeであること")
+    void checkTimeTagWhenNoUpdatedDate(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        Map<String, String> idPostedDateMap = Map.of(
+            "501", "2020-09-16",
+            "163", "2021-04-28",
+            "1435", "2018-10-01"
+        );
+        idPostedDateMap.forEach((id, expectedDatetime) -> blogDetailPage.checkTimeTagDatetime(id, expectedDatetime));
+    }
+
+    @Test
+    @DisplayName("テスト環境で更新日のある記事のtimeタグに更新日がdatetimeであること")
+    @EnabledOnEnvironment(production = false, reason = "テスト環境の記事が本番環境に追いついていないため")
+    void checkTimeTagWhenNoUpdateDateOnTestEnv(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        Map<String, String> idUpdatedDateMap = Map.of(
+            "8962", "2022-12-09",
+            "8947", "2022-11-92",
+            "8931", "2022-09-06"
+        );
+
+        idUpdatedDateMap.forEach((id, expectedDatetime) -> blogDetailPage.checkTimeTagDatetime(id, expectedDatetime));
+    }
+
+    @Test
+    @DisplayName("本番環境で更新日のある記事のtimeタグに投稿日がdatetimeであること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境の記事が本番環境に追いついていないため")
+    void checkTimeTagWhenUpdateDateOnProductionEnv(Page page) {
+        BlogDetailPage blogDetailPage = new BlogDetailPage(page);
+        Map<String, String> idUpdatedDateMap = Map.of(
+            "1868", "2022-11-02",
+            "1872", "2022-03-31",
+            "177", "2022-10-28"
+        );
+
+        idUpdatedDateMap.forEach((id, expectedDatetime) -> blogDetailPage.checkTimeTagDatetime(id, expectedDatetime));
+    }
 }
