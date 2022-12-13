@@ -80,7 +80,7 @@ public class Header {
      */
     public void hoverCategoryLink() {
         Locator categoryLink = page.locator("text=Category カテゴリ");
-        Locator categoryMenu = page.locator(".sub-menu.js-menu");
+        Locator categoryMenu = page.locator(".js-search-area-category");
         assertThat(categoryMenu).not().isVisible();
 
         categoryLink.hover();

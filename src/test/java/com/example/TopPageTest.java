@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.EnabledOnEnvironment;
 import com.example.pages.TopPage;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Locator;
@@ -14,9 +15,27 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ExtendWith(PlaywrightExtension.class)
 public class TopPageTest {
 
-    private static final String FINTAN_PROD_URL = "https://fintan.jp";
     private static final String META_DESCRIPTION = "Fintanは、TISインテックグループが研究開発や、システム開発、新規事業開発のプロジェクトで培ったノウハウを集約したサイトです。研究成果や、PJ推進のプラクティス、要件定義/設計/プログラミング/テストといった作業のプラクティス、成果物のテンプレート/サンプル、各種開発ツールを提供します。Fintanは、どなたでも無償でご利用いただけます。";
     private static final int LATEST_BLOG_COUNT_TOP_PAGE = 32;
+
+    private static final String[] categoryLinkNamesTestEnv = new String[]{
+        "#その他", "#アジャイル・スクラム", "#エンジニア育成・学習",
+        "#セキュリティ・暗号化", "#ソフトウェアテスティング", "#ブロックチェーン",
+        "#モバイルアプリケーション開発", "#環境構築・ログ・CI/ CD", "#量子コンピュータ",
+        "#開発プロセス", "#要件定義", "#Lerna",
+        "#Nablarch", "#UX/UIデザイン", "#Webアプリケーション開発",
+        "#先進技術研究", "#新規事業開発", "#活動発信・イベントレポート"
+    };
+
+    private static final String[] categoryLinkNamesProductionEnv = new String[]{
+        "#Webアプリケーション開発", "#モバイルアプリケーション開発", "#新規事業開発",
+        "#先進技術研究", "#UX/UIデザイン", "#XR",
+        "#ブロックチェーン", "#Nablarch", "#Lerna",
+        "#量子コンピュータ", "#アジャイル・スクラム", "#要件定義",
+        "#開発プロセス", "#ソフトウェアテスティング", "#環境構築・ログ・CI/ CD",
+        "#セキュリティ・暗号化", "#エンジニア育成・学習", "#活動発信・イベントレポート",
+        "#その他"
+    };
 
     @Test
     @DisplayName("トップページからカテゴリ一覧ページに遷移できること")
@@ -222,19 +241,29 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("カテゴリリンクをホバーして正しい内容のカテゴリ一覧が表示されること")
-    void categoryListIsCorrect(Page page) {
+    @DisplayName("テスト環境でカテゴリリンクをホバーして正しい内容のカテゴリ一覧が表示されること")
+    @EnabledOnEnvironment(production = false, reason = "テスト環境のカテゴリが本番に追いついてない為")
+    void categoryListIsCorrectOnTestEnv(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
 
-        Locator categoryMenuLinks = page.locator(".sub-menu.js-menu > ul > li > a");
-        assertThat(categoryMenuLinks).hasCount(6);
+        Locator categoryMenuLinks = page.locator(".js-search-area-category .category-list a");
+        assertThat(categoryMenuLinks).hasCount(categoryLinkNamesTestEnv.length);
 
-        String[] expectedCategoryNames = new String[] {"モバイルアプリケーション開発", "UX/UIデザイン", "Webアプリケーション開発", "先進技術研究", "新規事業開発", "その他のカテゴリ"};
-        if (topPage.fintan.url().equals(FINTAN_PROD_URL)) {
-            expectedCategoryNames = new String[] {"Webアプリケーション開発", "モバイルアプリケーション開発", "新規事業開発", "先進技術研究", "UX/UIデザイン", "その他のカテゴリ"};
-        }
-        assertThat(categoryMenuLinks).hasText(expectedCategoryNames);
+        assertThat(categoryMenuLinks).hasText(categoryLinkNamesTestEnv);
+    }
+
+    @Test
+    @DisplayName("本番環境でカテゴリリンクをホバーして正しい内容のカテゴリ一覧が表示されること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境のカテゴリが本番に追いついてない為")
+    void categoryListIsCorrectOnProductionEnv(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+
+        Locator categoryMenuLinks = page.locator(".js-search-area-category .category-list a");
+        assertThat(categoryMenuLinks).hasCount(categoryLinkNamesProductionEnv.length);
+
+        assertThat(categoryMenuLinks).hasText(categoryLinkNamesProductionEnv);
     }
 
     @Test
