@@ -144,7 +144,7 @@ public class BlogDetailPageTest {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         Map<String, String> idUpdatedDateMap = Map.of(
             "8962", "2022-12-09",
-            "8947", "2022-11-92",
+            "8947", "2022-11-02",
             "8931", "2022-09-06"
         );
 
