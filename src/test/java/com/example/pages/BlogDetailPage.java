@@ -79,4 +79,13 @@ public class BlogDetailPage extends PageTemplate {
             assertEquals(id, name);
         }
     }
+
+    public void checkTimeTagDatetime(String pageId, String expectedDatetime) {
+        navigate(pageId);
+        Locator timeTag = page.locator(".post-date time[datetime]");
+        // datetimeを持ったtimeタグが一つだけであること
+        assertThat(timeTag).hasCount(1);
+        String actualDatetime = timeTag.first().getAttribute("datetime");
+        assertEquals(expectedDatetime, actualDatetime);
+    }
 }
