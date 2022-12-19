@@ -1,13 +1,17 @@
 package com.example;
 
+import com.example.config.EnabledOnEnvironment;
 import com.example.pages.CategoryTopPage;
 import com.example.playwright.PlaywrightExtension;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.util.Map;
+
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @ExtendWith(PlaywrightExtension.class)
 public class CategoryTopPageTest {
@@ -54,5 +58,29 @@ public class CategoryTopPageTest {
         CategoryTopPage categoryTopPage = new CategoryTopPage(page);
 
         categoryPathNameMap.forEach((path, name) -> categoryTopPage.checkH2Tag(path, name));
+    }
+
+    @Test
+    @DisplayName("テスト環境で（注目記事エリア）記事一覧の各記事著者名のdom要素はdivであること")
+    @EnabledOnEnvironment(production = false, reason = "テスト環境の記事が本番に追いついてない為")
+    void checkBlogAuthorNameDomElementSummaryBlogListOnTestEnv(Page page) {
+        CategoryTopPage categoryTopPage = new CategoryTopPage(page);
+        categoryTopPage.navigate("web-application", "Webアプリケーション開発");
+        Locator authorNameDivElement = page.locator("li.o-card.o-card--hot .o-card__content > .o-card__user > .info > div");
+        // 「.info > div」に著者名のdiv要素以外に、「div.bottom」の要素もあるため、div要素数＝記事数（web-applicationでは3）*２
+        // 2022-12-16時点で記事数＝3
+        assertThat(authorNameDivElement).hasCount(3*2);
+    }
+
+    @Test
+    @DisplayName("本番環境で（注目記事エリア）記事一覧の各記事著者名のdom要素はdivであること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境の記事が本番に追いついてない為")
+    void checkBlogAuthorNameDomElementSummaryBlogListOnProductionEnv(Page page) {
+        CategoryTopPage categoryTopPage = new CategoryTopPage(page);
+        categoryTopPage.navigate("web-application", "Webアプリケーション開発");
+        Locator authorNameDivElement = page.locator("li.o-card.o-card--hot .o-card__content > .o-card__user > .info > div");
+        // 「.info > div」に著者名のdiv要素以外に、「div.bottom」の要素もあるため、div要素数＝記事数（web-applicationでは7）*２
+        // 2022-12-16時点で記事数＝7
+        assertThat(authorNameDivElement).hasCount(7*2);
     }
 }
