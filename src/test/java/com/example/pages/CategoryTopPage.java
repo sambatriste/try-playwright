@@ -42,10 +42,8 @@ public class CategoryTopPage extends PageTemplate {
 
     public void checkH2Tag(String categoryPath, String categoryName) {
         page.navigate(fintan.url("/blog-category/" + categoryPath + "/"));
-        // 空のh2内容はJetpackが生成したもの（ほんとはJetpackの設定を見なし不要なh2を出入しないようにするが良いが影響範囲が判定されていないため暫定このまま）
-        // https://ja.jetpack.com/support/carousel/
         Locator h1Tag = page.locator("h2");
-        String[] expectedH2TagTexts = new String[] {categoryName, "", ""};
+        String[] expectedH2TagTexts = new String[] {categoryName};
         assertThat(h1Tag).hasCount(expectedH2TagTexts.length);
         assertThat(h1Tag).containsText(expectedH2TagTexts);
     }

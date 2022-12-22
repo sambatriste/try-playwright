@@ -285,9 +285,7 @@ public class TopPageTest {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h2");
-        // 空のh2内容はJetpackが生成したもの（ほんとはJetpackの設定を見なし不要なh2を出入しないようにするが良いが影響範囲が判定されていないため暫定このまま）
-        // https://ja.jetpack.com/support/carousel/
-        String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ", "", ""};
+        String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ"};
         assertThat(h2Tags).hasCount(h2TagTexts.length);
         assertThat(h2Tags).containsText(h2TagTexts);
     }

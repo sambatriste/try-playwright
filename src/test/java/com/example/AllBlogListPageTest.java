@@ -52,16 +52,13 @@ public class AllBlogListPageTest {
     @EnabledOnEnvironment(production = false, reason = "テスト環境のカテゴリが本番に追いついてない為")
     void checkH2tagTestEnv(Page page) {
         AllBlogListPage allBlogListPage = new AllBlogListPage(page);
-        // 空のh2内容はJetpackが生成したもの（ほんとはJetpackの設定を見なし不要なh2を出入しないようにするが良いが影響範囲が判定されていないため暫定このまま）
-        // https://ja.jetpack.com/support/carousel/
         String[] expectedH2TagTexts = new String[] {
             "その他", "アジャイル・スクラム", "エンジニア育成・学習",
             "セキュリティ・暗号化", "ソフトウェアテスティング", "ブロックチェーン",
             "モバイルアプリケーション開発", "環境構築・ログ・CI/ CD", "量子コンピュータ",
             "開発プロセス", "要件定義", "Lerna",
             "Nablarch", "UX/UIデザイン", "Webアプリケーション開発",
-            "先進技術研究", "新規事業開発", "活動発信・イベントレポート",
-            "", ""
+            "先進技術研究", "新規事業開発", "活動発信・イベントレポート"
         };
         allBlogListPage.navigate();
         Locator h2Tag = page.locator("h2");
@@ -74,8 +71,6 @@ public class AllBlogListPageTest {
     @EnabledOnEnvironment(production = true, reason = "テスト環境のカテゴリが本番に追いついてない為")
     void checkH2tagProductionEnv(Page page) {
         AllBlogListPage allBlogListPage = new AllBlogListPage(page);
-        // 空のh2内容はJetpackが生成したもの（ほんとはJetpackの設定を見なし不要なh2を出入しないようにするが良いが影響範囲が判定されていないため暫定このまま）
-        // https://ja.jetpack.com/support/carousel/
         String[]  expectedH2TagTexts = new String[] {
             "Webアプリケーション開発", "モバイルアプリケーション開発", "新規事業開発",
             "先進技術研究", "UX/UIデザイン", "XR",
@@ -83,7 +78,7 @@ public class AllBlogListPageTest {
             "量子コンピュータ", "アジャイル・スクラム", "要件定義",
             "開発プロセス", "ソフトウェアテスティング", "環境構築・ログ・CI/ CD",
             "セキュリティ・暗号化", "エンジニア育成・学習", "活動発信・イベントレポート",
-            "その他", "", ""
+            "その他"
         };
         allBlogListPage.navigate();
         Locator h2Tag = page.locator("h2");
