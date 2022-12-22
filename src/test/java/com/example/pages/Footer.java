@@ -1,5 +1,6 @@
 package com.example.pages;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -21,6 +22,10 @@ public class Footer {
     public void clickAllPostListLink() {
         page.locator("text=記事の総一覧リスト").click();
         assertThat(page).hasURL(fintan.pageUrl());
+    }
 
+    public void checkOrganizationIntroductionTitleDomElement() {
+        Locator titleDivElement = page.locator(".o-footer__intro .left div").first();
+        assertThat(titleDivElement).hasClass("o-title o-title--white");
     }
 }

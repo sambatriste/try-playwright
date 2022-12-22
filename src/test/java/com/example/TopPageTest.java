@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.config.EnabledOnEnvironment;
 import com.example.pages.TopPage;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Locator;
@@ -173,7 +174,7 @@ public class TopPageTest {
         // 著者アイコン
         assertThat(page.locator("li.o-card > .o-card__content > .o-card__user > .image").first()).isVisible();
         // 著者名
-        assertThat(page.locator("li.o-card > .o-card__content > .o-card__user > .info > h5").first()).isVisible();
+        assertThat(page.locator("li.o-card > .o-card__content > .o-card__user > .info > div").first()).isVisible();
         // 日付
         assertThat(page.locator("li.o-card > .o-card__content > .o-card__user > .info > .bottom > time").first()).isVisible();
         // いいね数
@@ -284,9 +285,7 @@ public class TopPageTest {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h2");
-        // 空のh2内容はJetpackが生成したもの（ほんとはJetpackの設定を見なし不要なh2を出入しないようにするが良いが影響範囲が判定されていないため暫定このまま）
-        // https://ja.jetpack.com/support/carousel/
-        String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ", "", ""};
+        String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ"};
         assertThat(h2Tags).hasCount(h2TagTexts.length);
         assertThat(h2Tags).containsText(h2TagTexts);
     }
@@ -308,5 +307,37 @@ public class TopPageTest {
         Locator webpImageElement = page.locator(".c-top__main-fish img").first();
         String actualImageFilePath = webpImageElement.getAttribute("src");
         assertEquals(topPage.fintan.url() + "/wp-content/themes/fintan/img/top/main-fish.webp", actualImageFilePath);
+    }
+
+    @Test
+    @DisplayName("テスト環境で（最新記事エリア）記事一覧の各記事著者名のdom要素はdivであること")
+    @EnabledOnEnvironment(production = false, reason = "テスト環境の記事が本番に追いついてない為")
+    void checkBlogAuthorNameDomElementOnTestEnv(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator authorNameDivElement = page.locator(".c-top__latest li.o-card > .o-card__content > .o-card__user > .info > div");
+        // 「.info > div」に著者名のdiv要素以外に、「div.bottom」の要素もあるため、div要素数＝記事数（LATEST_BLOG_COUNT_TOP_PAGEの32）*２
+        //　ただ、テスト環境では著者のない記事が存在するため、実際にLATEST_BLOG_COUNT_TOP_PAGEの32になっていない
+        // 2022-12-16時点で記事数＝29
+        assertThat(authorNameDivElement).hasCount(58);
+    }
+
+    @Test
+    @DisplayName("本番環境で（最新記事エリア）記事一覧の各記事著者名のdom要素はdivであること")
+    @EnabledOnEnvironment(production = true, reason = "テスト環境の記事が本番に追いついてない為")
+    void checkBlogAuthorNameDomElementOnProductionEnv(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator authorNameDivElement = page.locator(".c-top__latest li.o-card > .o-card__content > .o-card__user > .info > div");
+        // 「.info > div」に著者名のdiv要素以外に、「div.bottom」の要素もあるため、div要素数＝記事数（LATEST_BLOG_COUNT_TOP_PAGEの32）*２
+        assertThat(authorNameDivElement).hasCount(LATEST_BLOG_COUNT_TOP_PAGE*2);
+    }
+
+    @Test
+    @DisplayName("footerの組織紹介のタイトルはdom要素がdivであること")
+    void checkOrganizationIntroductionDomElement(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        topPage.footer.checkOrganizationIntroductionTitleDomElement();
     }
 }
