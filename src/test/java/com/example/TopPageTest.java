@@ -19,6 +19,25 @@ public class TopPageTest {
     private static final String META_DESCRIPTION = "Fintanは、TISインテックグループが研究開発や、システム開発、新規事業開発のプロジェクトで培ったノウハウを集約したサイトです。研究成果や、PJ推進のプラクティス、要件定義/設計/プログラミング/テストといった作業のプラクティス、成果物のテンプレート/サンプル、各種開発ツールを提供します。Fintanは、どなたでも無償でご利用いただけます。";
     private static final int LATEST_BLOG_COUNT_TOP_PAGE = 32;
 
+    private static final String[] categoryNamesTestEnv = new String[]{
+        "その他", "アジャイル・スクラム", "エンジニア育成・学習",
+        "セキュリティ・暗号化", "XR", "ソフトウェアテスティング", "ブロックチェーン",
+        "モバイルアプリケーション開発", "環境構築・ログ・CI/ CD", "量子コンピュータ",
+        "開発プロセス", "要件定義", "Lerna",
+        "Nablarch", "UX/UIデザイン", "Webアプリケーション開発",
+        "先進技術研究", "新規事業開発", "活動発信・イベントレポート"
+    };
+
+    private static final String[] categoryNamesProductionEnv = new String[]{
+        "Webアプリケーション開発", "モバイルアプリケーション開発", "新規事業開発",
+        "先進技術研究", "UX/UIデザイン", "XR",
+        "ブロックチェーン", "Nablarch", "Lerna",
+        "量子コンピュータ", "アジャイル・スクラム", "要件定義",
+        "開発プロセス", "ソフトウェアテスティング", "環境構築・ログ・CI/ CD",
+        "セキュリティ・暗号化", "エンジニア育成・学習", "活動発信・イベントレポート",
+        "その他"
+    };
+
     @Test
     @DisplayName("トップページからカテゴリ一覧ページに遷移できること")
     void clickCategoryLink(Page page) {
@@ -227,14 +246,13 @@ public class TopPageTest {
     void categoryListIsCorrect(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
-
         Locator categoryMenuLinks = page.locator(".sub-menu.js-menu > ul > li > a");
-        assertThat(categoryMenuLinks).hasCount(6);
 
-        String[] expectedCategoryNames = new String[] {"モバイルアプリケーション開発", "UX/UIデザイン", "Webアプリケーション開発", "先進技術研究", "新規事業開発", "その他のカテゴリ"};
+        String[] expectedCategoryNames = categoryNamesTestEnv;
         if (topPage.fintan.url().equals(FINTAN_PROD_URL)) {
-            expectedCategoryNames = new String[] {"Webアプリケーション開発", "モバイルアプリケーション開発", "新規事業開発", "先進技術研究", "UX/UIデザイン", "その他のカテゴリ"};
+            expectedCategoryNames = categoryNamesProductionEnv;
         }
+        assertThat(categoryMenuLinks).hasCount(expectedCategoryNames.length);
         assertThat(categoryMenuLinks).hasText(expectedCategoryNames);
     }
 
@@ -280,12 +298,21 @@ public class TopPageTest {
     }
 
     @Test
+    @DisplayName("h1タグが正しい内容であること")
+    void checkH1Tag(Page page) {
+        TopPage topPage = new TopPage(page);
+        topPage.navigate();
+        Locator h2Tags = page.locator("h1");
+        assertThat(h2Tags).containsText("Fintanは、TISインテックグループのノウハウを集約したサイトです。");
+    }
+
+    @Test
     @DisplayName("h2タグが正しい内容であること")
     void checkH2Tag(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h2");
-        String[] h2TagTexts = new String[] {"Fintanとは", "キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ"};
+        String[] h2TagTexts = new String[] {"キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ"};
         assertThat(h2Tags).hasCount(h2TagTexts.length);
         assertThat(h2Tags).containsText(h2TagTexts);
     }
