@@ -54,7 +54,7 @@ public class AllBlogListPageTest {
         AllBlogListPage allBlogListPage = new AllBlogListPage(page);
         String[] expectedH2TagTexts = new String[] {
             "その他", "アジャイル・スクラム", "エンジニア育成・学習",
-            "セキュリティ・暗号化", "ソフトウェアテスティング", "ブロックチェーン",
+            "セキュリティ・暗号化", "XR", "ソフトウェアテスティング", "ブロックチェーン",
             "モバイルアプリケーション開発", "環境構築・ログ・CI/ CD", "量子コンピュータ",
             "開発プロセス", "要件定義", "Lerna",
             "Nablarch", "UX/UIデザイン", "Webアプリケーション開発",
