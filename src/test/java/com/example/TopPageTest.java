@@ -304,7 +304,7 @@ public class TopPageTest {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h1");
-        assertThat(h2Tags).containsText("Fintanは、TISインテックグループのノウハウを集約したサイトです。");
+        assertThat(h2Tags).containsText("FintanではTISインテックグループの技術ノウハウを公開しています。");
     }
 
     @Test
