@@ -39,45 +39,18 @@ public class TopPage extends PageTemplate {
     }
 
     /**
-     * 最新記事の「もっと見る」リンクをクリックする。
+     * 最新記事の「もっと見る」リンクを取得する。
      */
-    public void clickLatestArticleReadMore() {
-        page.locator("text=もっと読む").first().click();
+    public Locator getLatestArticleReadMore() {
+        return page.locator("text=もっと読む").nth(1);
     }
 
     /**
-     * 最新記事の「短く表示する」ボタンをクリックする。
+     * 最新記事の「短く表示する」リンクを取得する。
      */
-    public void clickDisplayLatestArticlesShortly() {
-        Locator readMoreButton = page.locator("text=もっと読む").first();
-        Locator cards = getLatestArticleCards();
-        assertThat(cards).hasCount(8);
-
-        // 毎回Clickで記事が8個増える
-        readMoreButton.click();
-        assertThat(cards).hasCount(16);
-
-        readMoreButton.click();
-        assertThat(cards).hasCount(24);
-
-        // 記事が最大32個までに増える
-        readMoreButton.click();
-        assertThat(cards).hasCount(32);
-
-        Locator displayShortlyButton = page.locator("text=短く表示する").first();
-        // 32個まで増えたら「短く表示する」ボタンが出てくる
-        assertThat(displayShortlyButton).isVisible();
-        displayShortlyButton.click();
-        assertThat(cards).hasCount(8);
+    public Locator getLatestArticlesShortly() {
+        return page.locator("text=短く表示する").nth(1);
     }
 
-    public void searchKeyword(String keyword) {
-        Locator searchTextBox = page.locator("main [placeholder=\"気になるキーワードをいれてください\"]");
-        Locator searchButton = page.locator("main button:has-text(\"検索\")");
 
-        searchTextBox.click();
-        searchTextBox.type(keyword);
-        searchButton.click();
-        assertThat(page).hasURL(fintan.url("/?s=" + keyword));
-    }
 }

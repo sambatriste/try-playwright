@@ -166,7 +166,7 @@ public class TopPageTest {
         Locator cards = topPage.getLatestArticleCards();
         assertThat(cards).hasCount(8);
 
-        topPage.clickLatestArticleReadMore();
+        topPage.getLatestArticleReadMore().click();
         assertThat(cards).hasCount(16);
     }
 
@@ -175,7 +175,26 @@ public class TopPageTest {
     void displayBlogsShortly(Page page) {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
-        topPage.clickDisplayLatestArticlesShortly();
+        Locator readMoreButton = topPage.getLatestArticleReadMore();
+        Locator cards = topPage.getLatestArticleCards();
+        assertThat(cards).hasCount(8);
+
+        // 毎回Clickで記事が8個増える
+        readMoreButton.click();
+        assertThat(cards).hasCount(16);
+
+        readMoreButton.click();
+        assertThat(cards).hasCount(24);
+
+        // 記事が最大32個までに増える
+        readMoreButton.click();
+        assertThat(cards).hasCount(32);
+
+        Locator displayShortlyButton = topPage.getLatestArticlesShortly();
+        // 32個まで増えたら「短く表示する」ボタンが出てくる
+        assertThat(displayShortlyButton).isVisible();
+        displayShortlyButton.click();
+        assertThat(cards).hasCount(8);
     }
 
     @Test
@@ -258,35 +277,6 @@ public class TopPageTest {
     }
 
     @Test
-    @DisplayName("キーワード検索欄に文字を入力すると検索ボタンが活性化する。入力しないと非活性化されること")
-    void searchButtonBecomeSearchable(Page page) {
-        TopPage topPage = new TopPage(page);
-        topPage.navigate();
-
-        Locator searchButton = page.locator("main button:has-text(\"検索\")");
-        String unsearchableCssClass = "js-search-button_search";
-        String searchableCssClass = "js-search-button_search searchable";
-        // 入力なしの場合、「class=js-search-button_search」、非活性化状態
-        assertThat(searchButton).hasClass(unsearchableCssClass);
-        assertThat(searchButton).not().hasClass(searchableCssClass);
-
-        Locator searchTextBox = page.locator("main [placeholder=\"気になるキーワードをいれてください\"]");
-        searchTextBox.click();
-        searchTextBox.type("java");
-        // 入力した場合、「class=js-search-button_search searchable」、活性化状態
-        assertThat(searchButton).not().hasClass(unsearchableCssClass);
-        assertThat(searchButton).hasClass(searchableCssClass);
-    }
-
-    @Test
-    @DisplayName("キーワード検索ができること")
-    void canSearchKeyword(Page page) {
-        TopPage topPage = new TopPage(page);
-        topPage.navigate();
-        topPage.searchKeyword("java");
-    }
-
-    @Test
     @DisplayName("metaタグのdescriptionが正しい内容であること")
     void checkMetaDescription(Page page) {
         TopPage topPage = new TopPage(page);
@@ -313,7 +303,7 @@ public class TopPageTest {
         TopPage topPage = new TopPage(page);
         topPage.navigate();
         Locator h2Tags = page.locator("h2");
-        String[] h2TagTexts = new String[] {"キーワードでさがす", "おすすめ記事", "最新記事", "人気記事", "お知らせ"};
+        String[] h2TagTexts = {"おすすめ記事", "カテゴリー", "最新記事", "人気記事", "お知らせ"};
         assertThat(h2Tags).hasCount(h2TagTexts.length);
         assertThat(h2Tags).containsText(h2TagTexts);
     }
@@ -359,7 +349,7 @@ public class TopPageTest {
         topPage.navigate();
         Locator authorNameDivElement = page.locator(".c-top__latest li.o-card > .o-card__content > .o-card__user > .info > div");
         // 「.info > div」に著者名のdiv要素以外に、「div.bottom」の要素もあるため、div要素数＝記事数（LATEST_BLOG_COUNT_TOP_PAGEの32）*２
-        assertThat(authorNameDivElement).hasCount(LATEST_BLOG_COUNT_TOP_PAGE*2);
+        assertThat(authorNameDivElement).hasCount(LATEST_BLOG_COUNT_TOP_PAGE * 2);
     }
 
     @Test
