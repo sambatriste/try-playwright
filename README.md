@@ -48,4 +48,12 @@ Java版では自分でブラウザを指定する必要があり、Node.js版の
 ``` sh
 set PLAYWRIGHT_BROWSER_TYPE=firefox && mvn test
 ```
+## ソース構成
+  ├── pages　　PlaywrightのPage Objectの元に各画面のクラス。主にテストケースで共通に利用するメソッドを集約している。
+  ├── playwright　JunitとPlaywrightを使ったテストの共通設定を集約している。
+  │   ├── BrowerFactory.java
+  │   └── PlaywrightExtension.java 
+  ├── TopPageTest.java　
+  ├── CategoryListPageTest.java
+  ├── ・・・　画面毎に実行するテスト</span></code></pre>
 
