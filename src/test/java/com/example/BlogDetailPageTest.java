@@ -6,6 +6,7 @@ import com.example.pages.Fintan;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -159,6 +160,7 @@ public class BlogDetailPageTest {
     @Test
     @DisplayName("本番環境で更新日のある記事のtimeタグに投稿日がdatetimeであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事が本番環境に追いついていないため")
+    @Disabled("本番環境で記事が更新される度に修正に手間がかかるため")
     void checkTimeTagWhenUpdateDateOnProductionEnv(Page page) {
         BlogDetailPage blogDetailPage = new BlogDetailPage(page);
         Map<String, String> idUpdatedDateMap = Map.of(
