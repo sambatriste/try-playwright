@@ -5,6 +5,7 @@ import com.example.pages.CategoryTopPage;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -75,6 +76,7 @@ public class CategoryTopPageTest {
     @Test
     @DisplayName("本番環境で（注目記事エリア）記事一覧の各記事著者名のdom要素はdivであること")
     @EnabledOnEnvironment(production = true, reason = "テスト環境の記事が本番に追いついてない為")
+    @Disabled("本番環境で注目記事エリアに記事が増える度に修正必要があり、手間がかかるため")
     void checkBlogAuthorNameDomElementSummaryBlogListOnProductionEnv(Page page) {
         CategoryTopPage categoryTopPage = new CategoryTopPage(page);
         categoryTopPage.navigate("web-application", "Webアプリケーション開発");
