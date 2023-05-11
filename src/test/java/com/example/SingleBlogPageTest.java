@@ -4,6 +4,7 @@ import com.example.config.EnabledOnEnvironment;
 import com.example.pages.SingleBlogPage;
 import com.example.playwright.PlaywrightExtension;
 import com.microsoft.playwright.Page;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -64,6 +65,7 @@ public class SingleBlogPageTest {
     @Test
     @DisplayName("テスト環境固定ページの各ページのタイトルが正しい内容であること")
     @EnabledOnEnvironment(production = false, reason = "テスト環境のアーキテクトページ、バックエンドエンジニアページの記事データがないため")
+    @Disabled("テスト環境では表示できないページがあるため（ 職場・働き方紹介（学生向け） ）")
     void checkTitleTestEnv(Page page) {
         SingleBlogPage singleBlogPage = new SingleBlogPage(page);
 
